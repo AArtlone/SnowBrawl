@@ -4,49 +4,23 @@ using UnityEngine;
 
 public class GroundCheck : MonoBehaviour
 {
+    [SerializeField] private Collider2D groundCheckCol;
+    public bool IsGrounded { get; private set; }
 
-    private Player1Controller p1c;
-    private Player2Controller p2c;
-
-    void Start()
+    private void OnTriggerEnter2D(Collider2D col)
     {
-        p1c = FindObjectOfType<Player1Controller>();
-        p2c = FindObjectOfType<Player2Controller>();
+        if (col.gameObject.CompareTag("Ground"))
+            IsGrounded = true;
     }
 
-    private void OnCollisionEnter2D(Collision2D col)
+    private void OnTriggerExit2D(Collider2D col)
     {
-        if (col.gameObject.name == "Player1")
-        {
-            col.gameObject.GetComponent<Player1Controller>().PlayHitSound();
-        }
-        if (col.gameObject.name == "Player2")
-        {
-            col.gameObject.GetComponent<Player2Controller>().PlayHitSound();
-        }
+        if (col.gameObject.CompareTag("Ground"))
+            IsGrounded = false;
     }
 
-    private void OnCollisionStay2D(Collision2D col)
+    public void DisableCollision(Collider2D col)
     {
-        if (col.gameObject.name == "Player1")
-        {
-            Player1Controller.p1Grounded = true;
-        }
-        if (col.gameObject.name == "Player2")
-        {
-            Player2Controller.p2Grounded = true;
-        }
+        Physics2D.IgnoreCollision(groundCheckCol, col);
     }
-    private void OnCollisionExit2D(Collision2D col)
-    {
-        if (col.gameObject.name == "Player1")
-        {
-            Player1Controller.p1Grounded = false;
-        }
-        if (col.gameObject.name == "Player2")
-        {
-            Player2Controller.p2Grounded = false;
-        }
-    }
-
 }

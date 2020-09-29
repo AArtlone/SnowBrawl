@@ -417,7 +417,6 @@ public class Player1Controller : MonoBehaviour {
 
         if (Input.GetKeyDown("d"))
         {
-
             transform.localScale = new Vector3(1, 1, 1);
             m_FacingRight = true;
         }

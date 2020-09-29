@@ -1,8 +1,6 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
-public class BetterJumpTest : MonoBehaviour {
+public class ImprovedJump : MonoBehaviour {
 
     public float fallMultiplier = 2.5f;
 

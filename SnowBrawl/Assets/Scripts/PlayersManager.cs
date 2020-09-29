@@ -219,8 +219,8 @@ public class PlayersManager : MonoBehaviour {
     private void Start()
     {
         p1Col = GameObject.FindWithTag("Player1");
-        p2Col = GameObject.FindWithTag("Player2");
-        Physics2D.IgnoreCollision(p1Col.GetComponent<BoxCollider2D>(), p2Col.GetComponent<BoxCollider2D>());
+        //p2Col = GameObject.FindWithTag("Player2");
+        //Physics2D.IgnoreCollision(p1Col.GetComponent<BoxCollider2D>(), p2Col.GetComponent<BoxCollider2D>());
         StartCoroutine(StartGameCO());
     }
 

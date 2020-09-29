@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class CheckWhoWins : MonoBehaviour {
@@ -9,18 +7,17 @@ public class CheckWhoWins : MonoBehaviour {
     public GameObject p2WinText;
     public GameObject drawText;
 
-    // Use this for initialization
-    void Start () {
-		if(GameManager.p1Wins > GameManager.p2Wins)
-        {
+    void Start () 
+    {
+        int p1Wins = GameManager.p1Wins;
+        int p2Wins = GameManager.p2Wins;
+
+        if (p1Wins > p2Wins)
             p1WinText.SetActive(true);
-        } else if(GameManager.p1Wins < GameManager.p2Wins)
-        {
+        else if (p1Wins < p2Wins)
             p2WinText.SetActive(true);
-        } else if(GameManager.p1Wins == GameManager.p2Wins)
-        {
+        else
             drawText.SetActive(true);
-        }
 	}
 
     public void PlayAgain()
