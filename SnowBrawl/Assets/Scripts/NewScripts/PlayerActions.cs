@@ -1,35 +1,25 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
-public class PlayerActions
+public class PlayerActions: MonoBehaviour
 {
-    private KeyCode pickUpKey;
-    private KeyCode throwKey;
-    private KeyCode drop;
+    [SerializeField] private Player player;
+
+    private KeyCode pickUpKey = KeyCode.P;
+    private KeyCode throwKey = KeyCode.T;
+    private KeyCode drop = KeyCode.B;
+
+    private void Update()
+    {
+        CheckForActions();   
+    }
 
     public void CheckForActions()
     {
-        if (Input.GetKey(pickUpKey))
-            PickUp();
-        else if (Input.GetKey(throwKey))
-            Throw();
-        else if (Input.GetKey(drop))
-            Drop();
-    }
-
-    private void PickUp()
-    {
-
-    }
-
-    private void Throw()
-    {
-
-    }
-
-    private void Drop()
-    {
-
+        if (Input.GetKeyDown(pickUpKey))
+            player.PickUp();
+        else if (Input.GetKeyDown(throwKey))
+            player.Throw();
+        else if (Input.GetKeyDown(drop))
+            player.Drop();
     }
 }

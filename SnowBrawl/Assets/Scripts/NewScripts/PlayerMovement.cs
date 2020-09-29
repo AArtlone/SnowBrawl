@@ -1,24 +1,28 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
-public class PlayerMovement
+public class PlayerMovement: MonoBehaviour
 {
+    [SerializeField] private Player player;
+    [SerializeField] private GroundCheck groundCheck;
+    [SerializeField] private Rigidbody2D rbToMove;
+    [SerializeField] private Collider2D col;
+
     private MovementSettings mvSettings;
-    private GroundCheck groundCheck;
-    private Rigidbody2D rbToMove;
     private KeyCode jumpKey = KeyCode.W;
 
-    public PlayerMovement(MovementSettings mvSettings, Rigidbody2D rb, GroundCheck groundCheck)
+    private void Start()
     {
-        this.mvSettings = mvSettings;
-
-        rbToMove = rb;
-
-        this.groundCheck = groundCheck;
+        mvSettings = NewGameManager.Instance.MVSettings;
+        
+        groundCheck.DisableCollision(col);
     }
 
-    public void UpdateVelocity()
+    private void FixedUpdate()
+    {
+        UpdateVelocity();
+    }
+
+    private void UpdateVelocity()
     {
         UpdateHorizontalVelocity();
         UpdateVerticalVelocity();
@@ -26,21 +30,25 @@ public class PlayerMovement
 
     private void UpdateHorizontalVelocity()
     {
-        float xValue = Input.GetAxis("P1Horizontal");
+        float horizontalInput = Input.GetAxis("P1Horizontal");
 
-        if (xValue == 0)
+        if (horizontalInput > 0)
+            Flip(true);
+        else if (horizontalInput < 0)
+            Flip(false);
+        if (horizontalInput == 0)
         {
             rbToMove.velocity = new Vector2(0, rbToMove.velocity.y);
             return;
         }
 
-        rbToMove.AddForce(Vector2.right * mvSettings.speed * xValue);
+        rbToMove.AddForce(Vector2.right * mvSettings.speed * horizontalInput);
 
-        float xVel = rbToMove.velocity.x;
+        float horizontalVelocity = rbToMove.velocity.x;
 
-        xVel = Mathf.Clamp(xVel, mvSettings.minSpeed, mvSettings.maxSpeed);
+        horizontalVelocity = Mathf.Clamp(horizontalVelocity, mvSettings.minSpeed, mvSettings.maxSpeed);
 
-        rbToMove.velocity = new Vector2(xVel, rbToMove.velocity.y);
+        rbToMove.velocity = new Vector2(horizontalVelocity, rbToMove.velocity.y);
     }
 
     private void UpdateVerticalVelocity()
@@ -50,5 +58,15 @@ public class PlayerMovement
 
         if (Input.GetKey(jumpKey))
             rbToMove.velocity = Vector2.up * mvSettings.springAbility;
+    }
+
+    private void Flip(bool right)
+    {
+        player.FacingRight = right;
+
+        if (right)
+            transform.localScale = new Vector3(1, 1, 1);
+        else
+            transform.localScale = new Vector3(-1, 1, 1);
     }
 }

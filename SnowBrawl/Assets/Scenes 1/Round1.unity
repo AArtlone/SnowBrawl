@@ -2119,6 +2119,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 74db96a22a22a0244bd7037acc110820, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerID: 0
 --- !u!1 &1141759181949114
 GameObject:
   m_ObjectHideFlags: 0
@@ -2164,9 +2165,11 @@ GameObject:
   - component: {fileID: 95092287833876343}
   - component: {fileID: 61247490675172573}
   - component: {fileID: 82585101906299013}
-  - component: {fileID: 1296315947771334}
   - component: {fileID: 1296315947771335}
   - component: {fileID: 1296315947771336}
+  - component: {fileID: 1296315947771337}
+  - component: {fileID: 1296315947771334}
+  - component: {fileID: 1296315947771338}
   m_Layer: 0
   m_Name: Player1
   m_TagString: Player1
@@ -2183,13 +2186,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 1296315947771333}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 67ee000acc6c2774ca8b27a8ecb3f662, type: 3}
+  m_Script: {fileID: 11500000, guid: a05b690bf9fc3b642bc4666352748e1b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  groundCheck: {fileID: 832383176}
-  playerManager: {fileID: 1296315947771336}
-  rb: {fileID: 50389006651824657}
-  col: {fileID: 61247490675172573}
+  player: {fileID: 1296315947771337}
 --- !u!114 &1296315947771335
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2212,9 +2212,42 @@ MonoBehaviour:
   m_GameObject: {fileID: 1296315947771333}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: de5289abfc228004e93714780fc5373f, type: 3}
+  m_Script: {fileID: 11500000, guid: 14ef67557f2299c4f97b1b8748539548, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  player: {fileID: 1296315947771337}
+  groundCheck: {fileID: 832383176}
+  rbToMove: {fileID: 50389006651824657}
+  col: {fileID: 61247490675172573}
+--- !u!114 &1296315947771337
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1296315947771333}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4adda4cda3ab2eb4fa66b7834c5b8e06, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  snowballShooter: {fileID: 1296315947771338}
+  playerID: 0
+  shootingPoint: {fileID: 4937738305951397}
+--- !u!114 &1296315947771338
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1296315947771333}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a605ad3e6f3860741a39e79ecfb33334, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  snowballPrefab: {fileID: 50846855427690300, guid: ac92d3ce9cf304d46b87b80f99584b52,
+    type: 3}
 --- !u!1 &1351534111298745
 GameObject:
   m_ObjectHideFlags: 0
@@ -2262,6 +2295,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 74db96a22a22a0244bd7037acc110820, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerID: 0
 --- !u!4 &4104977848873540
 Transform:
   m_ObjectHideFlags: 0

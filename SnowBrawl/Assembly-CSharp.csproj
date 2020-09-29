@@ -74,18 +74,18 @@
     <Compile Include="Assets\Scripts\ImprovedJump.cs" />
     <Compile Include="Assets\Scripts\ManagingScenes.cs" />
     <Compile Include="Assets\Scripts\MovingPlatform.cs" />
-    <Compile Include="Assets\Scripts\NewScripts\MainBase.cs" />
+    <Compile Include="Assets\Scripts\NewScripts\Inventory.cs" />
     <Compile Include="Assets\Scripts\NewScripts\MovementSettings.cs" />
     <Compile Include="Assets\Scripts\NewScripts\NewGameManager.cs" />
-    <Compile Include="Assets\Scripts\NewScripts\NewPlayerController.cs" />
-    <Compile Include="Assets\Scripts\NewScripts\PickableBase.cs" />
     <Compile Include="Assets\Scripts\NewScripts\Player.cs" />
     <Compile Include="Assets\Scripts\NewScripts\PlayerActions.cs" />
-    <Compile Include="Assets\Scripts\NewScripts\PlayerBase.cs" />
-    <Compile Include="Assets\Scripts\NewScripts\PlayerManager.cs" />
+    <Compile Include="Assets\Scripts\NewScripts\PlayerID.cs" />
     <Compile Include="Assets\Scripts\NewScripts\PlayerMovement.cs" />
+    <Compile Include="Assets\Scripts\NewScripts\SnowballBase\PickableBase.cs" />
+    <Compile Include="Assets\Scripts\NewScripts\SnowballBase\PlayerBase.cs" />
+    <Compile Include="Assets\Scripts\NewScripts\SnowballBase\SnowPile.cs" />
+    <Compile Include="Assets\Scripts\NewScripts\SnowballShooter.cs" />
     <Compile Include="Assets\Scripts\P1Base.cs" />
-    <Compile Include="Assets\Scripts\P1Snowball.cs" />
     <Compile Include="Assets\Scripts\P2Base.cs" />
     <Compile Include="Assets\Scripts\P2Snowball.cs" />
     <Compile Include="Assets\Scripts\Player_Behavior_Script.cs" />
@@ -97,6 +97,7 @@
     <Compile Include="Assets\Scripts\PowerUps\GlovesPowerUp.cs" />
     <Compile Include="Assets\Scripts\PowerUps\PUSpawner.cs" />
     <Compile Include="Assets\Scripts\PowerUps\ShieldPU.cs" />
+    <Compile Include="Assets\Scripts\Snowball.cs" />
     <Compile Include="Assets\Scripts\SnowBallMaker.cs" />
     <Reference Include="Unity.TextMeshPro.Editor">
       <HintPath>C:/Unity Projects/SnowBrawl/SnowBrawl/SnowBrawl/Library/ScriptAssemblies/Unity.TextMeshPro.Editor.dll</HintPath>
