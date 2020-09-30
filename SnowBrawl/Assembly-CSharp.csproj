@@ -82,6 +82,8 @@
     <Compile Include="Assets\Scripts\NewScripts\PlayerActions.cs" />
     <Compile Include="Assets\Scripts\NewScripts\PlayerID.cs" />
     <Compile Include="Assets\Scripts\NewScripts\PlayerMovement.cs" />
+    <Compile Include="Assets\Scripts\NewScripts\PlayersSpawner.cs" />
+    <Compile Include="Assets\Scripts\NewScripts\PlayerUIController.cs" />
     <Compile Include="Assets\Scripts\NewScripts\SnowballBase\PickableBase.cs" />
     <Compile Include="Assets\Scripts\NewScripts\SnowballBase\PlayerBase.cs" />
     <Compile Include="Assets\Scripts\NewScripts\SnowballBase\SnowPile.cs" />

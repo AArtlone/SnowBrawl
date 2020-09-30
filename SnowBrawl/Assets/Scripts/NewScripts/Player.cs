@@ -1,7 +1,10 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 public class Player : MonoBehaviour
 {
+    public Action<int> numOfSnowballChanged;
+
     [SerializeField] private SnowballShooter snowballShooter;
     [SerializeField] private PlayerID playerID;
     [SerializeField] private Transform shootingPoint;
@@ -51,6 +54,8 @@ public class Player : MonoBehaviour
 
         inventory.Snowballs++;
 
+        RaiseSnowballChangedEvent();
+
         Debug.Log(playerID + " is picking up");
     }
 
@@ -63,6 +68,8 @@ public class Player : MonoBehaviour
 
         inventory.Snowballs--;
 
+        RaiseSnowballChangedEvent();
+
         Debug.Log(playerID + " is throwing");
     }
 
@@ -73,7 +80,24 @@ public class Player : MonoBehaviour
 
         inventory.Snowballs--;
 
+        RaiseSnowballChangedEvent();
+
         Debug.Log(playerID + " is dropping");
+    }
+
+    public void Kill()
+    {
+        inventory.Snowballs = 0;
+
+        RaiseSnowballChangedEvent();
+
+        Destroy(gameObject);
+    }
+
+    private void RaiseSnowballChangedEvent()
+    {
+        if (numOfSnowballChanged != null)
+            numOfSnowballChanged.Invoke(inventory.Snowballs);
     }
 
     private bool CheckIfCanPickUp()

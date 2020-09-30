@@ -1,21 +1,15 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System;
 using UnityEngine;
 
 public class NewGameManager : MonoBehaviour
 {
     public static NewGameManager Instance;
 
+    public Action<Player> playerSpawned;
+
     [SerializeField] private MovementSettings mvSettings;
 
-    [Header("Player Prefabs")]
-    [SerializeField] private Player p1Prefab;
-    [SerializeField] private Player p2Prefab;
-
-    [Header("Respawn")]
-    [SerializeField] private float playerRespawnTime;
-    [SerializeField] private Transform p1RespawnPos;
-    [SerializeField] private Transform p2RespawnPos;
+    [SerializeField] private PlayersSpawner playersSpawner;
 
     public MovementSettings MVSettings { get { return mvSettings; } }
 
@@ -31,32 +25,22 @@ public class NewGameManager : MonoBehaviour
         }
     }
 
+    private void Start()
+    {
+        playersSpawner.SpawnPlayer1();
+        playersSpawner.SpawnPlayer2();
+    }
+
     public void KillPlayer(Player player)
     {
-        Destroy(player.gameObject);
+        player.Kill();
 
-        StartCoroutine(RespawnPlayerCo(player.PlayerID));
+        playersSpawner.RespawnPlayer(player.PlayerID);
     }
 
-    private IEnumerator RespawnPlayerCo(PlayerID playerID)
+    public void PlayerWasSpawned(Player player)
     {
-        yield return new WaitForSeconds(playerRespawnTime);
-
-        // Check if the timer did not run out while it was waiting
-
-        if (playerID == PlayerID.P1)
-            RespawnP1();
-        else
-            RespawnP2();
-    }
-
-    private void RespawnP1()
-    {
-        Instantiate(p1Prefab, p1RespawnPos.position, Quaternion.identity);
-    }
-
-    private void RespawnP2()
-    {
-        Instantiate(p2Prefab, p2RespawnPos.position, Quaternion.identity);
+        if (playerSpawned != null)
+            playerSpawned.Invoke(player);
     }
 }
