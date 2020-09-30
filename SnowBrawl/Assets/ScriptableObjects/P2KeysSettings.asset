@@ -15,4 +15,4 @@ MonoBehaviour:
   jumpKey: 273
   throwKey: 91
   pickUpKey: 93
-  dropKey: 92
+  dropKey: 112

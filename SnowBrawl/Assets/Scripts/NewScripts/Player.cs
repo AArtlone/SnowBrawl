@@ -20,21 +20,27 @@ public class Player : MonoBehaviour
 
     private Inventory inventory;
 
+    private PlayerBase homeBase;
+
     private void Start()
     {
         inventory = new Inventory();
     }
 
-    public void EnteredHome()
+    public void EnteredHome(PlayerBase playerBase)
     {
         nearHome = true;
         nearPickableBase = true;
+
+        homeBase = playerBase;
     }
 
     public void ExitedHome()
     {
         nearHome = false;
         nearPickableBase = false;
+
+        homeBase = null;
     }
 
     public void EnteredPickableBase()
@@ -77,6 +83,9 @@ public class Player : MonoBehaviour
     {
         if (!CheckIfCanDrop())
             return;
+
+        if (homeBase != null)
+            homeBase.Snowballs++;
 
         inventory.Snowballs--;
 
