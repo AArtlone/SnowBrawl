@@ -4,9 +4,16 @@ public class PlayerActions: MonoBehaviour
 {
     [SerializeField] private Player player;
 
-    private KeyCode pickUpKey = KeyCode.P;
-    private KeyCode throwKey = KeyCode.T;
-    private KeyCode drop = KeyCode.B;
+    private KeyCode pickUpKey;
+    private KeyCode throwKey;
+    private KeyCode dropKey;
+
+    private void Awake()
+    {
+        pickUpKey = player.KeysSettings.pickUpKey;
+        throwKey = player.KeysSettings.throwKey;
+        dropKey = player.KeysSettings.dropKey;
+    }
 
     private void Update()
     {
@@ -19,7 +26,7 @@ public class PlayerActions: MonoBehaviour
             player.PickUp();
         else if (Input.GetKeyDown(throwKey))
             player.Throw();
-        else if (Input.GetKeyDown(drop))
+        else if (Input.GetKeyDown(dropKey))
             player.Drop();
     }
 }

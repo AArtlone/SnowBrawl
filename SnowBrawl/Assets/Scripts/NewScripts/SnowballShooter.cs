@@ -2,13 +2,13 @@
 
 public class SnowballShooter : MonoBehaviour
 {
-    [SerializeField] private Rigidbody2D snowballPrefab;
+    [SerializeField] private Snowball snowballPrefab;
     private float speed = 20f;
 
-    public void Shoot(Vector3 shootPos, Vector2 direction)
+    public void Shoot(Vector3 shootPos, Vector2 direction, PlayerID playerID)
     {
-        Rigidbody2D snowball = Instantiate(snowballPrefab, shootPos, Quaternion.identity);
+        Snowball snowball = Instantiate(snowballPrefab, shootPos, Quaternion.identity);
 
-        snowball.velocity = direction * speed;
+        snowball.Shoot(direction, speed, playerID);
     }
 }

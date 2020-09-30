@@ -16,9 +16,4 @@ public class GroundCheck : MonoBehaviour
         if (col.gameObject.CompareTag("Ground"))
             IsGrounded = false;
     }
-
-    public void DisableCollision(Collider2D col)
-    {
-        Physics2D.IgnoreCollision(groundCheckCol, col);
-    }
 }

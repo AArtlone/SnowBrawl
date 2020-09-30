@@ -5,7 +5,10 @@ public class Player : MonoBehaviour
     [SerializeField] private SnowballShooter snowballShooter;
     [SerializeField] private PlayerID playerID;
     [SerializeField] private Transform shootingPoint;
+    [SerializeField] private KeysSettings keysSettings;
+
     public PlayerID PlayerID { get { return playerID; } }
+    public KeysSettings KeysSettings { get { return keysSettings; } }
 
     private bool nearPickableBase;
     private bool nearHome;
@@ -48,7 +51,7 @@ public class Player : MonoBehaviour
 
         inventory.Snowballs++;
 
-        Debug.Log("picking up");
+        Debug.Log(playerID + " is picking up");
     }
 
     public void Throw()
@@ -56,11 +59,11 @@ public class Player : MonoBehaviour
         if (!CheckIfCanThrow())
             return;
 
-        snowballShooter.Shoot(shootingPoint.position, GetShootingDirection());
+        snowballShooter.Shoot(shootingPoint.position, GetShootingDirection(), playerID);
 
         inventory.Snowballs--;
 
-        Debug.Log("throwing");
+        Debug.Log(playerID + " is throwing");
     }
 
     public void Drop()
@@ -70,7 +73,7 @@ public class Player : MonoBehaviour
 
         inventory.Snowballs--;
 
-        Debug.Log("Dropping");
+        Debug.Log(playerID + " is dropping");
     }
 
     private bool CheckIfCanPickUp()

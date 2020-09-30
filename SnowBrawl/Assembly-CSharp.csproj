@@ -75,6 +75,7 @@
     <Compile Include="Assets\Scripts\ManagingScenes.cs" />
     <Compile Include="Assets\Scripts\MovingPlatform.cs" />
     <Compile Include="Assets\Scripts\NewScripts\Inventory.cs" />
+    <Compile Include="Assets\Scripts\NewScripts\KeysSettings.cs" />
     <Compile Include="Assets\Scripts\NewScripts\MovementSettings.cs" />
     <Compile Include="Assets\Scripts\NewScripts\NewGameManager.cs" />
     <Compile Include="Assets\Scripts\NewScripts\Player.cs" />

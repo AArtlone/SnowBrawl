@@ -8,13 +8,16 @@ public class PlayerMovement: MonoBehaviour
     [SerializeField] private Collider2D col;
 
     private MovementSettings mvSettings;
-    private KeyCode jumpKey = KeyCode.W;
+    private KeyCode jumpKey;
+
+    private void Awake()
+    {
+        jumpKey = player.KeysSettings.jumpKey;
+    }
 
     private void Start()
     {
         mvSettings = NewGameManager.Instance.MVSettings;
-        
-        groundCheck.DisableCollision(col);
     }
 
     private void FixedUpdate()
@@ -30,12 +33,10 @@ public class PlayerMovement: MonoBehaviour
 
     private void UpdateHorizontalVelocity()
     {
-        float horizontalInput = Input.GetAxis("P1Horizontal");
+        float horizontalInput = Input.GetAxis(player.PlayerID.ToString());
 
-        if (horizontalInput > 0)
-            Flip(true);
-        else if (horizontalInput < 0)
-            Flip(false);
+        FlipCharacter(horizontalInput);
+
         if (horizontalInput == 0)
         {
             rbToMove.velocity = new Vector2(0, rbToMove.velocity.y);
@@ -60,13 +61,19 @@ public class PlayerMovement: MonoBehaviour
             rbToMove.velocity = Vector2.up * mvSettings.springAbility;
     }
 
-    private void Flip(bool right)
+    private void FlipCharacter(float horizontalInput)
     {
-        player.FacingRight = right;
-
-        if (right)
+        if (horizontalInput > 0)
+        {
+            player.FacingRight = true;
+            
             transform.localScale = new Vector3(1, 1, 1);
-        else
+        }
+        else if (horizontalInput < 0)
+        {
+            player.FacingRight = false;
+
             transform.localScale = new Vector3(-1, 1, 1);
+        }
     }
 }
