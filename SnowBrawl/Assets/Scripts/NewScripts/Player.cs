@@ -6,9 +6,11 @@ public class Player : MonoBehaviour
     public Action<int> numOfSnowballChanged;
 
     [SerializeField] private SnowballShooter snowballShooter;
+    [SerializeField] private PlayerAnimationController animationController;
     [SerializeField] private PlayerID playerID;
     [SerializeField] private Transform shootingPoint;
     [SerializeField] private KeysSettings keysSettings;
+
 
     public PlayerID PlayerID { get { return playerID; } }
     public KeysSettings KeysSettings { get { return keysSettings; } }
@@ -70,7 +72,9 @@ public class Player : MonoBehaviour
         if (!CheckIfCanThrow())
             return;
 
-        snowballShooter.Shoot(shootingPoint.position, GetShootingDirection(), playerID);
+        snowballShooter.Shoot(shootingPoint, GetShootingDirection(), playerID);
+
+        animationController.ShootAnimation();
 
         inventory.Snowballs--;
 

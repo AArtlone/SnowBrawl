@@ -19,6 +19,7 @@ GameObject:
   - component: {fileID: 7871581718154758884}
   - component: {fileID: 7871581718154758885}
   - component: {fileID: 7871581718154758882}
+  - component: {fileID: 369006673973335446}
   m_Layer: 0
   m_Name: Player2
   m_TagString: Player2
@@ -265,6 +266,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   snowballShooter: {fileID: 7871581718154758887}
+  animationController: {fileID: 369006673973335446}
   playerID: 1
   shootingPoint: {fileID: 7868009395046208289}
   keysSettings: {fileID: 11400000, guid: 42c5feffc2fcab84290017dd340de672, type: 2}
@@ -324,6 +326,21 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   fallMultiplier: 5
+--- !u!114 &369006673973335446
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7871581718154758883}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cc79aba7a1cbced44ba114c876dcc96d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerId: 1
+  animator: {fileID: 7812062766972214817}
+  groundCheck: {fileID: 7871924728401704998}
 --- !u!1 &7871583142443685107
 GameObject:
   m_ObjectHideFlags: 0
