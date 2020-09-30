@@ -294,7 +294,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4adda4cda3ab2eb4fa66b7834c5b8e06, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  snowballShooter: {fileID: 1423892547228680508}
   animationController: {fileID: 2093435186531492784}
   playerID: 0
   shootingPoint: {fileID: 1429820986517713491}
@@ -312,6 +311,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 1423892547228680511}
+  snowballShooter: {fileID: 1423892547228680508}
+  animationController: {fileID: 2093435186531492784}
 --- !u!114 &1423892547228680508
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -326,6 +327,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   snowballPrefab: {fileID: 1248006794868032362, guid: ac92d3ce9cf304d46b87b80f99584b52,
     type: 3}
+  shootingPoint: {fileID: 1429820986517713491}
 --- !u!114 &2093435186531492784
 MonoBehaviour:
   m_ObjectHideFlags: 0

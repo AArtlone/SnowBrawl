@@ -34,4 +34,14 @@ public class PlayerAnimationController : MonoBehaviour
 
         animator.SetBool(ANIMATOR_SHOOTING, false);
     }
+
+    public void StartPickUpAnimation()
+    {
+        animator.SetBool(ANIMATOR_PICKINGUP, true);
+    }
+
+    public void StopPickUpAnimation()
+    {
+        animator.SetBool(ANIMATOR_PICKINGUP, false);
+    }
 }
