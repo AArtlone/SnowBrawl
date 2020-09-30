@@ -6,6 +6,7 @@ public class NewGameManager : MonoBehaviour
     public static NewGameManager Instance;
 
     public Action<Player> playerSpawned;
+    public Action<Player> playerKilled;
 
     [SerializeField] private MovementSettings mvSettings;
 
@@ -34,6 +35,9 @@ public class NewGameManager : MonoBehaviour
     public void KillPlayer(Player player)
     {
         player.Kill();
+
+        if (playerKilled != null)
+            playerKilled.Invoke(player);
 
         playersSpawner.RespawnPlayer(player.PlayerID);
     }

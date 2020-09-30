@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PlayerUIController : MonoBehaviour
 {
@@ -10,9 +11,14 @@ public class PlayerUIController : MonoBehaviour
 
     [SerializeField] private PlayerBase playerBase;
 
+    [SerializeField] private Sprite aliveIcon;
+    [SerializeField] private Sprite deadIcon;
+    [SerializeField] private Image characterImage;
+
     private void Awake()
     {
         NewGameManager.Instance.playerSpawned += OnPlayerSpawned;
+        NewGameManager.Instance.playerKilled += OnPlayerKilled;
     }
 
     private void Start()
@@ -23,8 +29,20 @@ public class PlayerUIController : MonoBehaviour
 
     private void OnPlayerSpawned(Player player)
     {
-        if (player.PlayerID == playerID)
-            player.numOfSnowballChanged += OnNumOfSnowballesChanged;
+        if (player.PlayerID != playerID)
+            return;
+
+        player.numOfSnowballChanged += OnNumOfSnowballesChanged;
+
+        characterImage.sprite = aliveIcon;
+    }
+
+    private void OnPlayerKilled(Player player)
+    {
+        if (player.PlayerID != playerID)
+            return;
+
+        characterImage.sprite = deadIcon;
     }
 
     private void OnNumOfSnowballesChanged(int value)

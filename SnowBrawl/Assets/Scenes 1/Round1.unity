@@ -1820,6 +1820,9 @@ MonoBehaviour:
   - {fileID: 1838351907181840}
   homeSnowballs: {fileID: 1335642625}
   playerBase: {fileID: 1126772731947089}
+  aliveIcon: {fileID: 21300000, guid: e3a8e0116c2590a4491b224f4a3f55d6, type: 3}
+  deadIcon: {fileID: 21300000, guid: 0326895e8c404af4baf806415f5189c3, type: 3}
+  characterImage: {fileID: 114198038973852948}
 --- !u!1 &1126772731947088
 GameObject:
   m_ObjectHideFlags: 0
@@ -2025,6 +2028,9 @@ MonoBehaviour:
   - {fileID: 1495256711179520}
   homeSnowballs: {fileID: 464564272}
   playerBase: {fileID: 1452183800217806}
+  aliveIcon: {fileID: 21300000, guid: 0dd02b9c902b4d84386a7647925025a4, type: 3}
+  deadIcon: {fileID: 21300000, guid: 97f016c3cc9f9574b88371868a3e7fb9, type: 3}
+  characterImage: {fileID: 114379308344274510}
 --- !u!1 &1392738837460116
 GameObject:
   m_ObjectHideFlags: 0
@@ -2695,7 +2701,7 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_Sprite: {fileID: 21300000, guid: 343439943ea3110499cb85577c63d095, type: 3}
+  m_Sprite: {fileID: 21300000, guid: e3a8e0116c2590a4491b224f4a3f55d6, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -2845,7 +2851,7 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_Sprite: {fileID: 21300000, guid: 4270496c7a009724b9c368d7aa837a92, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 0dd02b9c902b4d84386a7647925025a4, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -3796,7 +3802,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 373, y: 200}
-  m_SizeDelta: {x: 100, y: 110}
+  m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!224 &224838357432584252
 RectTransform:
