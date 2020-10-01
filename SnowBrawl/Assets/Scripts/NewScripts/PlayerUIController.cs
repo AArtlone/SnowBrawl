@@ -17,8 +17,8 @@ public class PlayerUIController : MonoBehaviour
 
     private void Awake()
     {
-        NewGameManager.Instance.playerSpawned += OnPlayerSpawned;
-        NewGameManager.Instance.playerKilled += OnPlayerKilled;
+        GameManager.Instance.playerSpawned += OnPlayerSpawned;
+        GameManager.Instance.playerKilled += OnPlayerKilled;
     }
 
     private void Start()

@@ -1,9 +1,9 @@
 ﻿using System;
 using UnityEngine;
 
-public class NewGameManager : MonoBehaviour
+public class GameManager : MonoBehaviour
 {
-    public static NewGameManager Instance;
+    public static GameManager Instance;
 
     public Action<Player> playerSpawned;
     public Action<Player> playerKilled;
@@ -34,6 +34,9 @@ public class NewGameManager : MonoBehaviour
 
     public void KillPlayer(Player player)
     {
+        if (player.PowerUpsManager.HasPowerUp(PowerUpType.Shield))
+            return;
+
         player.Kill();
 
         if (playerKilled != null)

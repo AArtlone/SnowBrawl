@@ -34,13 +34,13 @@ public class PlayersSpawner : MonoBehaviour
     {
         Player player = Instantiate(p1Prefab, p1RespawnPos.position, Quaternion.identity);
 
-        NewGameManager.Instance.PlayerWasSpawned(player);
+        GameManager.Instance.PlayerWasSpawned(player);
     }
 
     public void SpawnPlayer2()
     {
         Player player = Instantiate(p2Prefab, p2RespawnPos.position, Quaternion.identity);
 
-        NewGameManager.Instance.PlayerWasSpawned(player);
+        GameManager.Instance.PlayerWasSpawned(player);
     }
 }

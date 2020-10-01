@@ -17,7 +17,7 @@ public class PlayerMovement: MonoBehaviour
 
     private void Start()
     {
-        mvSettings = NewGameManager.Instance.MVSettings;
+        mvSettings = GameManager.Instance.MVSettings;
     }
 
     private void FixedUpdate()
@@ -43,7 +43,12 @@ public class PlayerMovement: MonoBehaviour
             return;
         }
 
-        rbToMove.AddForce(Vector2.right * mvSettings.speed * horizontalInput);
+        float speed = mvSettings.speed;
+
+        if (player.PowerUpsManager.HasPowerUp(PowerUpType.Boots))
+            speed = mvSettings.poweredUpSpeed;
+
+        rbToMove.AddForce(Vector2.right * speed * horizontalInput);
 
         float horizontalVelocity = rbToMove.velocity.x;
 

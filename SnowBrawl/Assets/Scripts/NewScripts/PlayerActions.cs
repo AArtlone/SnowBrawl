@@ -77,6 +77,9 @@ public class PlayerActions: MonoBehaviour
     {
         bool pickUpKeyIsDown = Input.GetKey(pickUpKey);
 
+        if (pickUpKeyIsDown && player.PowerUpsManager.HasPowerUp(PowerUpType.Gloves))
+            return true;
+
         if (!pickUpKeyIsDown)
         {
             animationController.StopPickUpAnimation();

@@ -5,11 +5,15 @@ public class Player : MonoBehaviour
 {
     public Action<int> numOfSnowballChanged;
 
+    public Action<PowerUpData> onPlayerReceivedPowerUp;
+
     [SerializeField] private PlayerID playerID;
     [SerializeField] private KeysSettings keysSettings;
+    [SerializeField] private PowerUpsManager powerUpsManager;
 
     public PlayerID PlayerID { get { return playerID; } }
     public KeysSettings KeysSettings { get { return keysSettings; } }
+    public PowerUpsManager PowerUpsManager { get { return powerUpsManager; } }
     public Inventory Inventory { get; private set; }
     public PlayerBase HomeBase { get; private set; }
     public PlayerBase EnemyBase { get; private set; }
@@ -22,6 +26,14 @@ public class Player : MonoBehaviour
     private void Start()
     {
         Inventory = new Inventory();
+    }
+
+    public void ReceivePowerUp(PowerUpData powerUpData)
+    {
+        if (onPlayerReceivedPowerUp != null)
+            onPlayerReceivedPowerUp(powerUpData);
+
+        powerUpsManager.PowerUpWasPickedUp(powerUpData);
     }
 
     public void EnteredHome(PlayerBase playerBase)
