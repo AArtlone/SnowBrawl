@@ -12,9 +12,11 @@ public class Player : MonoBehaviour
     public KeysSettings KeysSettings { get { return keysSettings; } }
     public Inventory Inventory { get; private set; }
     public PlayerBase HomeBase { get; private set; }
+    public PlayerBase EnemyBase { get; private set; }
 
     public bool NearPickableBase { get; private set; }
     public bool NearHome { get; private set; }
+    public bool NearEnemyBase { get; private set; }
     public bool FacingRight { get; set; }
 
     private void Start()
@@ -36,6 +38,20 @@ public class Player : MonoBehaviour
         NearPickableBase = false;
 
         HomeBase = null;
+    }
+
+    public void EnteredEnemyBase(PlayerBase enemyBase)
+    {
+        NearEnemyBase = true;
+
+        EnemyBase = enemyBase;
+    }
+
+    public void ExitedEnemyBase()
+    {
+        NearEnemyBase = false;
+
+        EnemyBase = null;
     }
 
     public void EnteredPickableBase()

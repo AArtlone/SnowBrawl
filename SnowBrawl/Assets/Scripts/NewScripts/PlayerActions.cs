@@ -28,55 +28,80 @@ public class PlayerActions: MonoBehaviour
 
     private void Update()
     {
-        CheckForActions();
-    }
-
-    public void CheckForActions()
-    {
-        CheckForPickUp();
-        
         if (Input.GetKeyDown(throwKey))
             Shoot();
-        
+
         if (Input.GetKeyDown(dropKey))
             Drop();
+
+        CheckForPickUpAction();
+    }
+
+    private void CheckForPickUpAction()
+    {
+        if (player.NearPickableBase)
+            CheckForPickUp();
+        else if (player.NearEnemyBase)
+            CheckForSteal();
     }
 
     private void CheckForPickUp()
     {
+        if (!CheckIfCanPickUp())
+            return;
+
+        if (!WHATONAMETHIS())
+            return;
+
+        PickUp();
+
+        if (!CheckIfCanPickUp())
+            animationController.StopPickUpAnimation();
+    }
+
+    private void CheckForSteal()
+    {
+        if (!CheckIfCanSteal())
+            return;
+
+        if (!WHATONAMETHIS())
+            return;
+
+        PickUp();
+
+        if (!CheckIfCanSteal())
+            animationController.StopPickUpAnimation();
+    }
+
+    private bool WHATONAMETHIS()
+    {
         bool pickUpKeyIsDown = Input.GetKey(pickUpKey);
 
-        // If the pickUpKey is pressed, incerement the key down timer and check if it is higher than time needed
-        if (pickUpKeyIsDown)
-        {
-            if (!CheckIfCanPickUp())
-                return;
-
-            animationController.StartPickUpAnimation();
-
-            pickUpKeyDownTime += Time.deltaTime;
-
-            if (pickUpKeyDownTime < timeToPickUp)
-                return;
-
-            PickUp();
-
-            pickUpKeyDownTime = 0;
-
-            // If inventory is full then we stop the animation
-            if (player.Inventory.IsInventoryFull())
-                animationController.StopPickUpAnimation();
-        }
-        else
+        if (!pickUpKeyIsDown)
         {
             animationController.StopPickUpAnimation();
             pickUpKeyDownTime = 0;
+            return false;
         }
+
+        animationController.StartPickUpAnimation();
+
+        pickUpKeyDownTime += Time.deltaTime;
+
+        if (pickUpKeyDownTime < timeToPickUp)
+            return false;
+
+        return true;
     }
 
     public void PickUp()
     {
+        pickUpKeyDownTime = 0;
+        
         player.Inventory.Snowballs++;
+
+        if (player.NearEnemyBase)
+            player.EnemyBase.Snowballs--;
 
         player.RaiseSnowballChangedEvent();
     }
@@ -119,13 +144,27 @@ public class PlayerActions: MonoBehaviour
 
     private bool CheckIfCanPickUp()
     {
+        if (player.Inventory.IsInventoryFull())
+            return false;
+        
         if (!player.NearPickableBase)
             return false;
+        
+        return true;
+    }
 
-        if (!player.Inventory.IsInventoryFull())
-            return true;
-        else
+    private bool CheckIfCanSteal()
+    {
+        if (player.Inventory.IsInventoryFull())
             return false;
+        
+        if (!player.NearEnemyBase)
+            return false;
+
+        if (player.EnemyBase.Snowballs == 0)
+            return false;
+
+        return true;
     }
 
     private bool CheckIfCanShoot()

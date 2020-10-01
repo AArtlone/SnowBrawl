@@ -33,7 +33,7 @@ public class PlayerBase : PickableBase
         if (player.PlayerID == playerID)
             player.EnteredHome(this);
         else
-            player.EnteredPickableBase();
+            player.EnteredEnemyBase(this);
     }
 
     protected override void OnTriggerExit2D(Collider2D col)
@@ -46,6 +46,6 @@ public class PlayerBase : PickableBase
         if (player.PlayerID == playerID)
             player.ExitedHome();
         else
-            player.ExitedPickableBase();
+            player.ExitedEnemyBase();
     }
 }

@@ -36,7 +36,6 @@ public class Snowball : MonoBehaviour
 
         // TODO: Kill other player
         NewGameManager.Instance.KillPlayer(player);
-        print("Snowball hit " + player.PlayerID);
 
         Destroy(gameObject);
     }
