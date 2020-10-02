@@ -10,8 +10,24 @@ public class ControlListener : MonoBehaviour
     public GameAction GameAction { get { return gameAction; } }
     public PlayerID PlayerID { get { return playerID; } }
 
-    public void UpdateText(string text)
+    public KeyCode KeyBinding { get; private set; }
+
+    public void UpdateBinding(KeyCode keyCode)
     {
-        keyCodeText.text = text;
+        KeyBinding = keyCode;
+
+        UpdateText();
+    }
+
+    public void ResetBinding()
+    {
+        KeyBinding = KeyCode.None;
+
+        UpdateText();
+    }
+
+    private void UpdateText()
+    {
+        keyCodeText.text = KeyBinding.ToString();
     }
 }

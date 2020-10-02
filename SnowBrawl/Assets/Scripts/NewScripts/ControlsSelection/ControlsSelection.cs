@@ -11,6 +11,9 @@ public class ControlsSelection : MonoBehaviour
 
     [SerializeField] private List<ControlListener> allListeners;
 
+    [SerializeField] private GameObject confirmationPopUp;
+    [SerializeField] private GameObject selectAllBindingsPopUp;
+
     private ControlListener controlListener;
 
     private PlayerID selectedPlayer = PlayerID.P1;
@@ -31,6 +34,8 @@ public class ControlsSelection : MonoBehaviour
 
         if (e.isKey && Input.GetKeyDown(e.keyCode))
         {
+            CheckIfBusy(e.keyCode);
+
             listeningToControlSelection = false;
 
             KeysSettings keysSettings;
@@ -56,7 +61,72 @@ public class ControlsSelection : MonoBehaviour
                     break;
             }
 
-            controlListener.UpdateText(e.keyCode.ToString());
+            controlListener.UpdateBinding(e.keyCode);
+
+            controlListener = null;
+        }
+    }
+
+    public void StartGame()
+    {
+        if (!CheckIfAllBindingsWereAssigned())
+        {
+            confirmationPopUp.SetActive(false);
+
+            selectAllBindingsPopUp.SetActive(true);
+        }
+        else
+        {
+            confirmationPopUp.SetActive(true);
+        }
+    }
+
+    public void ClosePopUp(GameObject obj)
+    {
+        obj.SetActive(false);
+    }
+
+    private bool CheckIfAllBindingsWereAssigned()
+    {
+        foreach (ControlListener controlListener in allListeners)
+        {
+            if (controlListener.KeyBinding == KeyCode.None)
+                return false;
+        }
+
+        return true;
+    }
+
+    private void CheckIfBusy(KeyCode keyCode)
+    {
+        foreach (ControlListener controlListener in allListeners)
+        {
+            if (controlListener.KeyBinding != keyCode)
+                continue;
+
+            KeysSettings keysSettings;
+
+            if (selectedPlayer == PlayerID.P1)
+                keysSettings = p1KeysSettings;
+            else
+                keysSettings = p2KeysSettings;
+
+            switch (controlListener.GameAction)
+            {
+                case GameAction.Jump:
+                    keysSettings.jumpKey = KeyCode.None;
+                    break;
+                case GameAction.Throw:
+                    keysSettings.throwKey = KeyCode.None;
+                    break;
+                case GameAction.PickUp:
+                    keysSettings.pickUpKey = KeyCode.None;
+                    break;
+                case GameAction.Drop:
+                    keysSettings.dropKey = KeyCode.None;
+                    break;
+            }
+            controlListener.ResetBinding();
         }
     }
 
@@ -116,16 +186,16 @@ public class ControlsSelection : MonoBehaviour
             switch (controlListener.GameAction)
             {
                 case GameAction.Drop:
-                    controlListener.UpdateText(keysSettings.dropKey.ToString());
+                    controlListener.UpdateBinding(keysSettings.dropKey);
                     break;
                 case GameAction.Throw:
-                    controlListener.UpdateText(keysSettings.throwKey.ToString());
+                    controlListener.UpdateBinding(keysSettings.throwKey);
                     break;
                 case GameAction.Jump:
-                    controlListener.UpdateText(keysSettings.jumpKey.ToString());
+                    controlListener.UpdateBinding(keysSettings.jumpKey);
                     break;
                 case GameAction.PickUp:
-                    controlListener.UpdateText(keysSettings.pickUpKey.ToString());
+                    controlListener.UpdateBinding(keysSettings.pickUpKey);
                     break;
             }
         }
