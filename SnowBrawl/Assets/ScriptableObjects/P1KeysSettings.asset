@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: P1KeysSettings
   m_EditorClassIdentifier: 
   jumpKey: 119
-  throwKey: 114
-  pickUpKey: 116
-  dropKey: 121
+  throwKey: 116
+  pickUpKey: 121
+  dropKey: 114

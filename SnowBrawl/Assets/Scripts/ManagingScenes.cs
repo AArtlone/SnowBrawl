@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class ManagingScenes : MonoBehaviour {
@@ -16,6 +14,6 @@ public class ManagingScenes : MonoBehaviour {
         } else if (SceneManager.GetActiveScene().name == "InstructionsPt2")
         {
             SceneManager.LoadScene("Round1");
-        }
+        }   
     }
 }

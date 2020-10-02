@@ -12,6 +12,12 @@ public class GameManager : MonoBehaviour
 
     [SerializeField] private PlayersSpawner playersSpawner;
 
+    [SerializeField] private RoundTimer roundTimer;
+
+    [SerializeField] private GameObject roundOverObject;
+
+    [SerializeField] private int roundDuration;
+
     public MovementSettings MVSettings { get { return mvSettings; } }
 
     private void Awake()
@@ -30,6 +36,13 @@ public class GameManager : MonoBehaviour
     {
         playersSpawner.SpawnPlayer1();
         playersSpawner.SpawnPlayer2();
+
+        roundTimer.StartRound(roundDuration);
+    }
+
+    public void RoundOver()
+    {
+        roundOverObject.SetActive(true);
     }
 
     public void KillPlayer(Player player)
