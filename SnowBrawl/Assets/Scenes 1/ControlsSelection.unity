@@ -3043,20 +3043,16 @@ MonoBehaviour:
   m_GameObject: {fileID: 778801094}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 00d913054fdf89f4eb67d667ee33d330, type: 3}
+  m_Script: {fileID: 11500000, guid: ce6f5ae7f5bc9234e97f97796c401d9d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  useColor: 0
-  idleSprite: {fileID: 0}
-  hoverSprite: {fileID: 0}
-  activeSprite: {fileID: 0}
-  idleColor: {r: 0.7411765, g: 0.3921569, b: 0.2509804, a: 0}
-  hoverColor: {r: 0.3254902, g: 0.20000002, b: 0.16862746, a: 0}
-  activeColor: {r: 0, g: 0, b: 0, a: 0}
   pages:
   - {fileID: 2004112064}
   - {fileID: 1528415107}
   - {fileID: 1527161277}
+  idleColor: {r: 0.7411765, g: 0.3921569, b: 0.2509804, a: 0}
+  hoverColor: {r: 0.4784314, g: 0.2784314, b: 0.19607845, a: 0}
+  activeColor: {r: 0.12941177, g: 0.078431375, b: 0.08235294, a: 0}
 --- !u!4 &778801096
 Transform:
   m_ObjectHideFlags: 0

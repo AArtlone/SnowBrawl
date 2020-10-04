@@ -1,23 +1,13 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 
-public class TabGroup : MonoBehaviour
+public abstract class TabGroup : MonoBehaviour
 {
-    [SerializeField] private bool useColor;
-
-    [SerializeField] private Sprite idleSprite;
-    [SerializeField] private Sprite hoverSprite;
-    [SerializeField] private Sprite activeSprite;
-
-    [SerializeField] private Color idleColor;
-    [SerializeField] private Color hoverColor;
-    [SerializeField] private Color activeColor;
-
-    private List<TabButton> tabButtons;
+    protected List<TabButton> tabButtons;
 
     [SerializeField] private List<GameObject> pages;
 
-    private TabButton selectedTab;
+    protected TabButton selectedTab;
 
     private void Start()
     {
@@ -38,18 +28,9 @@ public class TabGroup : MonoBehaviour
         tabButtons.Add(tabButton);
     }
 
-    public void EnterTab(TabButton tabButton)
-    {
-        if (selectedTab == null || tabButton == selectedTab)
-            return;
+    public abstract void EnterTab(TabButton tabButton);
 
-        if (useColor)
-            tabButton.UpdateVisual(hoverColor);
-        else
-            tabButton.UpdateVisual(hoverSprite);
-    }
-
-    public void SelectTab(TabButton tabButton)
+    public virtual void SelectTab(TabButton tabButton)
     {
         if (selectedTab != null)
             selectedTab.Deselect();
@@ -57,11 +38,6 @@ public class TabGroup : MonoBehaviour
         selectedTab = tabButton;
 
         ResetTabButtonsVisuals();
-
-        if (useColor)
-            selectedTab.Select(activeColor);
-        else
-            selectedTab.Select(activeSprite);
 
         int index = tabButton.transform.GetSiblingIndex();
 
@@ -74,26 +50,7 @@ public class TabGroup : MonoBehaviour
         ResetTabButtonsVisuals();
     }
 
-    private void ResetTabButtonsVisuals()
-    {
-        foreach (TabButton button in tabButtons)
-        {
-            // We dont reset the selected tab button
-            if (selectedTab != null && selectedTab == button)
-                continue;
-
-            if (useColor)
-            {
-                Color color = new Color(idleColor.r, idleColor.g, idleColor.b, 1f);
-
-                button.UpdateVisual(color);
-
-                continue;
-            }
-
-            button.UpdateVisual(idleSprite);
-        }
-    }
+    protected abstract void ResetTabButtonsVisuals();
 
     private void ResetPages()
     {
