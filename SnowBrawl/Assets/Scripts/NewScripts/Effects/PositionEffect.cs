@@ -1,10 +1,8 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class PositionEffect : Effect<Vector3>
 {
-    protected override void Smth()
+    protected override void ApplyEffect()
     {
         transform.localPosition = GetNextValue();
     }

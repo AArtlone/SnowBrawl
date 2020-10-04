@@ -5,7 +5,7 @@ public class AlphaEffect : Effect<float>
 {
     private CanvasGroup canvasGroup;
 
-    protected override void Smth()
+    protected override void ApplyEffect()
     {
         canvasGroup.alpha = GetNextValue();
     }

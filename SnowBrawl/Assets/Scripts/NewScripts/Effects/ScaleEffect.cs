@@ -2,7 +2,7 @@
 
 public class ScaleEffect : Effect<Vector3>
 {
-    protected override void Smth()
+    protected override void ApplyEffect()
     {
         transform.localScale = GetNextValue();
     }

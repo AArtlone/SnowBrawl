@@ -3,9 +3,11 @@ using UnityEngine;
 
 public abstract class TabGroup : MonoBehaviour
 {
-    protected List<TabButton> tabButtons;
-
     [SerializeField] private List<GameObject> pages;
+
+    [SerializeField] private EffectBase selectEffect;
+    
+    protected List<TabButton> tabButtons;
 
     protected TabButton selectedTab;
 
