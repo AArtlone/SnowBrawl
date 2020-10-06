@@ -1,0 +1,45 @@
+﻿using System.Collections;
+using System.Collections.Generic;
+using System.Reflection;
+using UnityEditor;
+using UnityEngine;
+
+public class MyUtilities : MonoBehaviour
+{
+    public static List<T> ShuffleList<T>(List<T> listToShuffle)
+    {
+        for (int i = 0; i < listToShuffle.Count; i++)
+        {
+            var temp = listToShuffle[i];
+            int randomIndex = Random.Range(i, listToShuffle.Count);
+            listToShuffle[i] = listToShuffle[randomIndex];
+            listToShuffle[randomIndex] = temp;
+        }
+        return listToShuffle;
+    }
+
+    [MenuItem("GameObject/Create Empty At Zero/Game Object", false, -1)]
+    public static void CreateGameObjectAtZero()
+    {
+        var obj = new GameObject("Empty Object At Zero/Object");
+        Selection.activeObject = obj;
+    }
+
+    [MenuItem("GameObject/Create Empty At Zero/Sprite", false, -1)]
+    public static void CreateSpriteAtZero()
+    {
+        var obj = new GameObject("Empty Object At Zero", typeof(SpriteRenderer));
+        Selection.activeObject = obj;
+    }
+
+
+    public static void ClearLog()
+    {
+#if UNITY_EDITOR
+        var assembly = Assembly.GetAssembly(typeof(UnityEditor.Editor));
+        var type = assembly.GetType("UnityEditor.LogEntries");
+        var method = type.GetMethod("Clear");
+        method.Invoke(new object(), null);
+#endif
+    }
+}
