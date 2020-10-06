@@ -22,6 +22,7 @@ public class PlayerMovement: MonoBehaviour
 
     private void FixedUpdate()
     {
+        print(GameManager.Instance.GameIsPaused);
         if (GameManager.Instance.GameIsPaused)
             return;
 

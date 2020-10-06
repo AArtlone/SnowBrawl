@@ -6,9 +6,6 @@ public class ControlsSelection : MonoBehaviour
     [SerializeField] private KeysSettings p1KeysSettings;
     [SerializeField] private KeysSettings p2KeysSettings;
 
-    [SerializeField] private GameObject p1View;
-    [SerializeField] private GameObject p2View;
-
     [SerializeField] private List<ControlListener> allListeners;
 
     [SerializeField] private GameObject confirmationPopUp;
@@ -34,7 +31,7 @@ public class ControlsSelection : MonoBehaviour
 
         if (e.isKey && Input.GetKeyDown(e.keyCode))
         {
-            CheckIfBusy(e.keyCode);
+            CheckIfIsTaken(e.keyCode);
 
             listeningToControlSelection = false;
 
@@ -67,7 +64,51 @@ public class ControlsSelection : MonoBehaviour
         }
     }
 
+    private void LoadView()
+    {
+        foreach (ControlListener controlListener in allListeners)
+        {
+            KeysSettings keysSettings;
+
+            if (controlListener.PlayerID == PlayerID.P1)
+                keysSettings = p1KeysSettings;
+            else
+                keysSettings = p2KeysSettings;
+
+            switch (controlListener.GameAction)
+            {
+                case GameAction.Drop:
+                    controlListener.UpdateBinding(keysSettings.dropKey);
+                    break;
+                case GameAction.Throw:
+                    controlListener.UpdateBinding(keysSettings.throwKey);
+                    break;
+                case GameAction.Jump:
+                    controlListener.UpdateBinding(keysSettings.jumpKey);
+                    break;
+                case GameAction.PickUp:
+                    controlListener.UpdateBinding(keysSettings.pickUpKey);
+                    break;
+            }
+        }
+    }
+
+    public void ListenToControl(GameObject obj)
+    {
+        controlListener = obj.GetComponent<ControlListener>();
+
+        if (controlListener == null)
+            return;
+
+        listeningToControlSelection = true;
+    }
+
     public void StartGame()
+    {
+        SBSceneManager.Instance.LoadFirstRound();
+    }
+
+    public void ShowConfirmationPopUp()
     {
         if (!CheckIfAllBindingsWereAssigned())
         {
@@ -97,7 +138,11 @@ public class ControlsSelection : MonoBehaviour
         return true;
     }
 
-    private void CheckIfBusy(KeyCode keyCode)
+    /// <summary>
+    /// Check if the key binding is taken already
+    /// </summary>
+    /// <param name="keyCode"></param>
+    private void CheckIfIsTaken(KeyCode keyCode)
     {
         foreach (ControlListener controlListener in allListeners)
         {
@@ -127,77 +172,6 @@ public class ControlsSelection : MonoBehaviour
                     break;
             }
             controlListener.ResetBinding();
-        }
-    }
-
-    private void Update()
-    {
-        if (!listeningToControlSelection)
-            return;
-
-        //foreach (KeyCode kc in System.Enum.GetValues(typeof(KeyCode)))
-        //{
-        //    if (Input.GetKeyDown(kc))
-        //        print(kc);
-        //}
-    }
-
-    public void ListenToControl(GameObject obj)
-    {
-        controlListener = obj.GetComponent<ControlListener>();
-
-        if (controlListener == null)
-            return;
-
-        listeningToControlSelection = true;
-    }
-
-    public void SelectPlayer(int playerID)
-    {
-        if (playerID == 1 && selectedPlayer != PlayerID.P1)
-        {
-            selectedPlayer = PlayerID.P1;
-            UpdateView();
-        }
-        else if (playerID == 2 && selectedPlayer != PlayerID.P2)
-        {
-            selectedPlayer = PlayerID.P2;
-            UpdateView();
-        }
-    }
-
-    private void UpdateView()
-    {
-        p1View.SetActive(selectedPlayer == PlayerID.P1);
-        p2View.SetActive(selectedPlayer == PlayerID.P2);
-    }
-
-    private void LoadView()
-    {
-        foreach (ControlListener controlListener in allListeners)
-        {
-            KeysSettings keysSettings;
-
-            if (controlListener.PlayerID == PlayerID.P1)
-                keysSettings = p1KeysSettings;
-            else
-                keysSettings = p2KeysSettings;
-
-            switch (controlListener.GameAction)
-            {
-                case GameAction.Drop:
-                    controlListener.UpdateBinding(keysSettings.dropKey);
-                    break;
-                case GameAction.Throw:
-                    controlListener.UpdateBinding(keysSettings.throwKey);
-                    break;
-                case GameAction.Jump:
-                    controlListener.UpdateBinding(keysSettings.jumpKey);
-                    break;
-                case GameAction.PickUp:
-                    controlListener.UpdateBinding(keysSettings.pickUpKey);
-                    break;
-            }
         }
     }
 }

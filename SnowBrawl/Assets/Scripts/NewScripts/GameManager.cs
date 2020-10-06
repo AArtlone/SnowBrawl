@@ -91,6 +91,11 @@ public class GameManager : MonoBehaviour
             playerSpawned.Invoke(player);
     }
 
+    public void LoadNextLevel()
+    {
+        SBSceneManager.Instance.LoadNextRound();
+    }
+
     public string GetPlayerWonText()
     {
         int p1BaseSnowball = p1Base.Snowballs;

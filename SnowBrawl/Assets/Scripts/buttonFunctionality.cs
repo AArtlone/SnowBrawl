@@ -10,7 +10,7 @@ public class buttonFunctionality : MonoBehaviour {
     {
 
         //load the instructions scene
-        SceneManager.LoadScene("Instructions");
+        UnityEngine.SceneManagement.SceneManager.LoadScene("Instructions");
 
     }
 }

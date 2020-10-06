@@ -1225,7 +1225,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &592834772
 PrefabInstance:
@@ -1496,7 +1496,18 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 802553528}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1736299699}
+        m_MethodName: LoadNextLevel
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
 --- !u!114 &802553528
@@ -1656,7 +1667,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &879842873
 PrefabInstance:
@@ -3358,7 +3369,7 @@ MonoBehaviour:
   mvSettings: {fileID: 11400000, guid: 7fc12027f8ec85d47a3000e3129b819f, type: 2}
   playersSpawner: {fileID: 1029349934}
   roundTimer: {fileID: 1736299701}
-  roundDuration: 3
+  roundDuration: 5
   p1Base: {fileID: 1126772731947089}
   p2Base: {fileID: 1452183800217806}
   roundOverObject: {fileID: 276908571}

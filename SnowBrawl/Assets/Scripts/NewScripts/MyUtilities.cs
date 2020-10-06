@@ -21,14 +21,14 @@ public class MyUtilities : MonoBehaviour
     [MenuItem("GameObject/Create Empty At Zero/Game Object", false, -1)]
     public static void CreateGameObjectAtZero()
     {
-        var obj = new GameObject("Empty Object At Zero/Object");
+        var obj = new GameObject("---------------");
         Selection.activeObject = obj;
     }
 
     [MenuItem("GameObject/Create Empty At Zero/Sprite", false, -1)]
     public static void CreateSpriteAtZero()
     {
-        var obj = new GameObject("Empty Object At Zero", typeof(SpriteRenderer));
+        var obj = new GameObject("---------------", typeof(SpriteRenderer));
         Selection.activeObject = obj;
     }
 
