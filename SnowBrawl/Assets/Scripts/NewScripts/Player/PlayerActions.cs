@@ -28,6 +28,9 @@ public class PlayerActions: MonoBehaviour
 
     private void Update()
     {
+        if (GameManager.Instance.GameIsPaused)
+            return;
+
         if (Input.GetKeyDown(throwKey))
             Shoot();
 

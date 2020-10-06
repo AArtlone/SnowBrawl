@@ -109,6 +109,6 @@ public abstract class EffectBase : MonoBehaviour
 
     protected float GetCurveValue()
     {
-        return tween.curve.Evaluate(playTime);
+        return tween.curve.Evaluate(normTime);
     }
 }

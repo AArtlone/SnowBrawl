@@ -1,4 +1,5 @@
 ﻿using System;
+using TMPro;
 using UnityEngine;
 
 public class GameManager : MonoBehaviour
@@ -14,22 +15,28 @@ public class GameManager : MonoBehaviour
 
     [SerializeField] private RoundTimer roundTimer;
 
-    [SerializeField] private GameObject roundOverObject;
-
     [SerializeField] private int roundDuration;
 
+    [SerializeField] private PlayerBase p1Base;
+    [SerializeField] private PlayerBase p2Base;
+
+    [Header("UI References")]
+    [SerializeField] private GameObject roundOverObject;
+    [SerializeField] private TextMeshProUGUI playerXWon;
+    [SerializeField] private GameObject nextRoundButton;
+
     public MovementSettings MVSettings { get { return mvSettings; } }
+
+    public bool GameIsPaused { get; private set; }
 
     private void Awake()
     {
         if (Instance != null && Instance != this)
-        {
             Destroy(gameObject);
-        }
         else
-        {
             Instance = this;
-        }
+
+        GameIsPaused = true;
     }
 
     private void Start()
@@ -40,9 +47,29 @@ public class GameManager : MonoBehaviour
         roundTimer.StartRound(roundDuration);
     }
 
+    public void RoundStart()
+    {
+        GameIsPaused = false;
+    }
+
     public void RoundOver()
     {
+        GameIsPaused = true;
+
+        //TODO: turn physics off to freeze players
+
+        ShowRoundOverUI();
+    }
+
+    private void ShowRoundOverUI()
+    {
         roundOverObject.SetActive(true);
+
+        playerXWon.gameObject.SetActive(true);
+
+        playerXWon.text = GetPlayerWonText();
+
+        nextRoundButton.SetActive(true);
     }
 
     public void KillPlayer(Player player)
@@ -62,5 +89,18 @@ public class GameManager : MonoBehaviour
     {
         if (playerSpawned != null)
             playerSpawned.Invoke(player);
+    }
+
+    public string GetPlayerWonText()
+    {
+        int p1BaseSnowball = p1Base.Snowballs;
+        int p2BaseSnowball = p2Base.Snowballs;
+
+        if (p1BaseSnowball > p2BaseSnowball)
+            return "Player 1 Won";
+        else if (p1BaseSnowball < p2BaseSnowball)
+            return "Player 2 Won";
+        else
+            return "Draw";
     }
 }
