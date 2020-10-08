@@ -22,7 +22,6 @@ public class PlayerMovement: MonoBehaviour
 
     private void FixedUpdate()
     {
-        print(GameManager.Instance.GameIsPaused);
         if (GameManager.Instance.GameIsPaused)
             return;
 
@@ -37,7 +36,7 @@ public class PlayerMovement: MonoBehaviour
 
     private void UpdateHorizontalVelocity()
     {
-        float horizontalInput = Input.GetAxis(player.PlayerID.ToString());
+        float horizontalInput = Input.GetAxisRaw(player.PlayerID.ToString());
 
         FlipCharacter(horizontalInput);
 

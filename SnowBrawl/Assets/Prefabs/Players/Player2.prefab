@@ -312,7 +312,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cc79aba7a1cbced44ba114c876dcc96d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerId: 1
+  playerID: 1
   animator: {fileID: 7812062766972214817}
   groundCheck: {fileID: 7871924728401704998}
 --- !u!114 &7871581718154758887

@@ -456,7 +456,9 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Button
+  m_Text: 'Drop
+
+'
 --- !u!222 &194590376
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -1155,7 +1157,9 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Button
+  m_Text: 'Throw
+
+'
 --- !u!222 &479562344
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -1761,7 +1765,7 @@ GameObject:
   m_Component:
   - component: {fileID: 665091003}
   m_Layer: 5
-  m_Name: GameObject (2)
+  m_Name: PickUpButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1858,7 +1862,9 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Button
+  m_Text: 'Jump
+
+'
 --- !u!222 &680353603
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -2445,7 +2451,7 @@ MonoBehaviour:
     lineCount: 1
     pageCount: 1
     materialCount: 1
-  m_havePropertiesChanged: 1
+  m_havePropertiesChanged: 0
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_spriteAnimator: {fileID: 0}
@@ -3045,7 +3051,9 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Button
+  m_Text: 'Drop
+
+'
 --- !u!222 &1054680354
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -3064,7 +3072,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1061872212}
   m_Layer: 5
-  m_Name: GameObject
+  m_Name: JumpButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3428,7 +3436,7 @@ MonoBehaviour:
     lineCount: 1
     pageCount: 1
     materialCount: 1
-  m_havePropertiesChanged: 1
+  m_havePropertiesChanged: 0
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_spriteAnimator: {fileID: 0}
@@ -3496,6 +3504,8 @@ MonoBehaviour:
   - {fileID: 447268718}
   confirmationPopUp: {fileID: 981184876}
   selectAllBindingsPopUp: {fileID: 1557403355}
+  p1Button: {fileID: 274720356}
+  p2Button: {fileID: 647319589}
 --- !u!4 &1225500975
 Transform:
   m_ObjectHideFlags: 0
@@ -3520,7 +3530,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1234017670}
   m_Layer: 5
-  m_Name: GameObject
+  m_Name: JumpButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3681,7 +3691,7 @@ MonoBehaviour:
     lineCount: 1
     pageCount: 1
     materialCount: 1
-  m_havePropertiesChanged: 1
+  m_havePropertiesChanged: 0
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_spriteAnimator: {fileID: 0}
@@ -3717,7 +3727,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1414479238}
   m_Layer: 5
-  m_Name: GameObject (1)
+  m_Name: ThrowButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3965,7 +3975,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1506067317}
   m_Layer: 5
-  m_Name: GameObject (2)
+  m_Name: PickUpButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4364,7 +4374,9 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Button
+  m_Text: 'Jump
+
+'
 --- !u!222 &1545769746
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -4545,7 +4557,7 @@ MonoBehaviour:
     lineCount: 1
     pageCount: 1
     materialCount: 1
-  m_havePropertiesChanged: 1
+  m_havePropertiesChanged: 0
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_spriteAnimator: {fileID: 0}
@@ -4641,7 +4653,9 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Button
+  m_Text: 'Throw
+
+'
 --- !u!222 &1646595576
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -4660,7 +4674,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1703712813}
   m_Layer: 5
-  m_Name: GameObject (3)
+  m_Name: DropButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5076,7 +5090,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1948172436}
   m_Layer: 5
-  m_Name: GameObject (1)
+  m_Name: ThrowButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5403,7 +5417,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2110592016}
   m_Layer: 5
-  m_Name: GameObject (3)
+  m_Name: DropButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5543,7 +5557,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Button
+  m_Text: Pick Up
 --- !u!222 &2123380924
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -5622,7 +5636,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Button
+  m_Text: Pick Up
 --- !u!222 &2134049372
 CanvasRenderer:
   m_ObjectHideFlags: 0

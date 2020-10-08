@@ -11,6 +11,9 @@ public class ControlsSelection : MonoBehaviour
     [SerializeField] private GameObject confirmationPopUp;
     [SerializeField] private GameObject selectAllBindingsPopUp;
 
+    [SerializeField] private TabButton p1Button;
+    [SerializeField] private TabButton p2Button;
+
     private ControlListener controlListener;
 
     private PlayerID selectedPlayer = PlayerID.P1;
@@ -20,6 +23,25 @@ public class ControlsSelection : MonoBehaviour
     private void Awake()
     {
         LoadView();
+
+        p1Button.onTabSelected += OnPlayer1TabSelected;
+        p2Button.onTabSelected += OnPlayer2TabSelected;
+    }
+
+    private void OnDestroy()
+    {
+        p1Button.onTabSelected -= OnPlayer1TabSelected;
+        p2Button.onTabSelected -= OnPlayer2TabSelected;
+    }
+
+    private void OnPlayer1TabSelected()
+    {
+        selectedPlayer = PlayerID.P1;
+    }
+
+    private void OnPlayer2TabSelected()
+    {
+        selectedPlayer = PlayerID.P2;
     }
 
     private void OnGUI()
@@ -29,40 +51,59 @@ public class ControlsSelection : MonoBehaviour
 
         Event e = Event.current;
 
-        if (e.isKey && Input.GetKeyDown(e.keyCode))
-        {
-            CheckIfIsTaken(e.keyCode);
+        if (!e.isKey || !Input.GetKeyDown(e.keyCode))
+            return;
 
-            listeningToControlSelection = false;
-
-            KeysSettings keysSettings;
-
-            if (selectedPlayer == PlayerID.P1)
-                keysSettings = p1KeysSettings;
-            else
-                keysSettings = p2KeysSettings;
-
-            switch (controlListener.GameAction)
-            {
-                case GameAction.Jump:
-                    keysSettings.jumpKey = e.keyCode;
-                    break;
-                case GameAction.Throw:
-                    keysSettings.throwKey = e.keyCode;
-                    break;
-                case GameAction.PickUp:
-                    keysSettings.pickUpKey = e.keyCode;
-                    break;
-                case GameAction.Drop:
-                    keysSettings.dropKey = e.keyCode;
-                    break;
-            }
-
-            controlListener.UpdateBinding(e.keyCode);
-
-            controlListener = null;
-        }
+        Smth(e.keyCode);
     }
+
+    private void Update()
+    {
+        if (!listeningToControlSelection)
+            return;
+
+        var pressedCustomkey = SBInputManager.Instance.IsAnyCustomKeyIsDown();
+
+        if (pressedCustomkey == KeyCode.None)
+            return;
+
+        Smth(pressedCustomkey);
+    }
+
+    private void Smth(KeyCode keyCode)
+    {
+        CheckIfIsTaken(keyCode);
+
+        listeningToControlSelection = false;
+
+        KeysSettings keysSettings;
+
+        if (selectedPlayer == PlayerID.P1)
+            keysSettings = p1KeysSettings;
+        else
+            keysSettings = p2KeysSettings;
+
+        switch (controlListener.GameAction)
+        {
+            case GameAction.Jump:
+                keysSettings.jumpKey = keyCode;
+                break;
+            case GameAction.Throw:
+                keysSettings.throwKey = keyCode;
+                break;
+            case GameAction.PickUp:
+                keysSettings.pickUpKey = keyCode;
+                break;
+            case GameAction.Drop:
+                keysSettings.dropKey = keyCode;
+                break;
+        }
+
+        controlListener.UpdateBinding(keyCode);
+
+        controlListener = null;
+    }
+
 
     private void LoadView()
     {

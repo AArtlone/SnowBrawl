@@ -17,7 +17,7 @@ public class PlayerAnimationController : MonoBehaviour
         if (GameManager.Instance.GameIsPaused)
             return;
 
-        float horizontalInput = Input.GetAxis(playerId.ToString());
+        float horizontalInput = Input.GetAxisRaw(playerId.ToString());
 
         animator.SetFloat(ANIMATOR_SPEED, Mathf.Abs(horizontalInput));
 

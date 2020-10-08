@@ -1,10 +1,14 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
+using UnityEngine.Events;
+using System;
 
 [RequireComponent(typeof(Image))]
 public class TabButton : MonoBehaviour, IPointerEnterHandler, IPointerClickHandler, IPointerExitHandler
 {
+    public Action onTabSelected;
+
     [SerializeField] private TabGroup tabGroup;
 
     public Image BackgroundImage { get; private set; }
@@ -33,11 +37,17 @@ public class TabButton : MonoBehaviour, IPointerEnterHandler, IPointerClickHandl
     public void Select(Color color)
     {
         UpdateVisual(color);
+
+        if (onTabSelected != null)
+            onTabSelected.Invoke();
     }
 
     public void Select(Sprite sprite)
     {
         UpdateVisual(sprite);
+
+        if (onTabSelected != null)
+            onTabSelected.Invoke();
     }
 
     public void Deselect()
