@@ -76,6 +76,7 @@ public class PlayerActions: MonoBehaviour
             animationController.StopPickUpAnimation();
     }
 
+    //TODO: rename
     private bool WHATONAMETHIS()
     {
         bool pickUpKeyIsDown = Input.GetKey(pickUpKey);

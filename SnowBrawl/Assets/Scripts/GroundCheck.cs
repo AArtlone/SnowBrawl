@@ -2,7 +2,6 @@
 
 public class GroundCheck : MonoBehaviour
 {
-    [SerializeField] private Collider2D groundCheckCol;
     public bool IsGrounded { get; private set; }
 
     private void OnTriggerStay2D(Collider2D col)
