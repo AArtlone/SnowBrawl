@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class PlayerAnimationController : MonoBehaviour
 {
-    [SerializeField] private PlayerID playerId;
+    [SerializeField] private PlayerID playerID;
     [SerializeField] private Animator animator;
     [SerializeField] private GroundCheck groundCheck;
 
@@ -17,7 +17,12 @@ public class PlayerAnimationController : MonoBehaviour
         if (GameManager.Instance.GameIsPaused)
             return;
 
-        float horizontalInput = Input.GetAxisRaw(playerId.ToString());
+        string id = playerID.ToString();
+
+        float horizontalInput = Input.GetAxisRaw(id + " Keyboard");
+
+        if (horizontalInput == 0)
+            horizontalInput = Input.GetAxisRaw(id);
 
         animator.SetFloat(ANIMATOR_SPEED, Mathf.Abs(horizontalInput));
 

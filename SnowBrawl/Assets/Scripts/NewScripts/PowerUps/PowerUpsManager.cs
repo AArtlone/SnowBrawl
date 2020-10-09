@@ -4,7 +4,8 @@ using UnityEngine;
 
 public class PowerUpsManager : MonoBehaviour
 {
-    private bool hasPowerUp;
+    public bool HasAnyPowerUp { get; private set; }
+
     private PowerUpType powerUpType;
 
     public void PowerUpWasPickedUp(PowerUpData powerUpData)
@@ -14,17 +15,17 @@ public class PowerUpsManager : MonoBehaviour
 
     private IEnumerator Player1PowerUpCo(PowerUpData powerUpData)
     {
-        hasPowerUp = true;
+        HasAnyPowerUp = true;
         powerUpType = powerUpData.powerUpType;
 
         yield return new WaitForSeconds(powerUpData.powerUpDuration);
 
-        hasPowerUp = false;
+        HasAnyPowerUp = false;
     }
 
     public bool HasPowerUp(PowerUpType type)
     {
-        if (!hasPowerUp)
+        if (!HasAnyPowerUp)
             return false;
 
         return powerUpType == type;

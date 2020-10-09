@@ -7,8 +7,6 @@ public class Loader : MonoBehaviour
 
     private void Update()
     {
-        print(SBSceneManager.Instance.LoadingOperationProgress);
-
         string text = "Loading - " + SBSceneManager.Instance.LoadingOperationProgress.ToString();
 
         loadingText.text = text;

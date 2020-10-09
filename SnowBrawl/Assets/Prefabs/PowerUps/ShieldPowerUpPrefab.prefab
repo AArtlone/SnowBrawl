@@ -69,7 +69,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 1
   m_Sprite: {fileID: 21300000, guid: 40199082219aef34f84bbcef9dd3a9af, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -95,6 +95,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   powerUpIcon: {fileID: 21300000, guid: e1310d7931b578549a12ee2e608c2c03, type: 3}
   powerUpType: 0
+  powerUpDuration: 10
 --- !u!61 &4941439557304229300
 BoxCollider2D:
   m_ObjectHideFlags: 0

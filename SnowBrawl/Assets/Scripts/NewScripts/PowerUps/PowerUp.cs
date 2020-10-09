@@ -3,20 +3,26 @@
 public class PowerUp : MonoBehaviour
 {
     [SerializeField] private Sprite powerUpIcon;
+    
     [SerializeField] private PowerUpType powerUpType;
 
-    private const float powerUpDuration = 20f;
+    [SerializeField] private float powerUpDuration = 20f;
 
-    private void OnTriggerEnter2D(Collider2D col)
+    private void OnTriggerStay2D(Collider2D col)
     {
         var player = col.GetComponent<Player>();
 
         if (player == null)
             return;
 
+        if (player.PowerUpsManager.HasAnyPowerUp)
+            return;
+
         var powerUpData = new PowerUpData(player.PlayerID, powerUpType, powerUpIcon, powerUpDuration);
 
         player.ReceivePowerUp(powerUpData);
+
+        GameManager.Instance.PowerUpWasPickedUp();
 
         Destroy(gameObject);
     }

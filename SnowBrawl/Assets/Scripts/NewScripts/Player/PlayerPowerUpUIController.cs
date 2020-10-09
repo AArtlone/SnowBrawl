@@ -10,13 +10,11 @@ public class PlayerPowerUpUIController : MonoBehaviour
 
     [SerializeField] private TextMeshProUGUI powerUpTimerText;
 
-    private PowerUpType powerUpType;
-
     private float powerUpTimer;
 
     private bool playerHasPowerUp;
 
-    private void Start()
+    private void Awake()
     {
         GameManager.Instance.playerSpawned += OnPlayerSpawned;
         GameManager.Instance.playerKilled += OnPlayerKilled;
@@ -44,6 +42,8 @@ public class PlayerPowerUpUIController : MonoBehaviour
             return;
 
         powerUpTimer = powerUpData.powerUpDuration;
+
+        powerUpIcon.sprite = powerUpData.powerUpIcon;
 
         powerUpIcon.gameObject.SetActive(true);
 

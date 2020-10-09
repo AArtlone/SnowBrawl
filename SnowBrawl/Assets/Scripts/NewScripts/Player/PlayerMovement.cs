@@ -36,15 +36,20 @@ public class PlayerMovement: MonoBehaviour
 
     private void UpdateHorizontalVelocity()
     {
-        float horizontalInput = Input.GetAxisRaw(player.PlayerID.ToString());
+        string id = player.PlayerID.ToString();
 
-        FlipCharacter(horizontalInput);
+        float horizontalInput = Input.GetAxisRaw(id + " Keyboard");
+
+        if (horizontalInput == 0)
+            horizontalInput = Input.GetAxisRaw(id);
 
         if (horizontalInput == 0)
         {
             rbToMove.velocity = new Vector2(0, rbToMove.velocity.y);
             return;
         }
+
+        FlipCharacter(horizontalInput);
 
         float speed = mvSettings.speed;
 

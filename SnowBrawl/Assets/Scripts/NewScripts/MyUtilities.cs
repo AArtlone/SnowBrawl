@@ -4,7 +4,7 @@ using System.Reflection;
 using UnityEditor;
 using UnityEngine;
 
-public class MyUtilities : MonoBehaviour
+public class MyUtilities
 {
     public static List<T> ShuffleList<T>(List<T> listToShuffle)
     {
@@ -17,7 +17,7 @@ public class MyUtilities : MonoBehaviour
         }
         return listToShuffle;
     }
-
+#if UNITY_EDITOR
     [MenuItem("GameObject/Create Empty At Zero/Game Object", false, -1)]
     public static void CreateGameObjectAtZero()
     {
@@ -42,4 +42,5 @@ public class MyUtilities : MonoBehaviour
         method.Invoke(new object(), null);
 #endif
     }
+#endif
 }

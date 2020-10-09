@@ -6,6 +6,9 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager Instance;
 
+    public Action onRoundStart;
+    public Action onPowerUpPickUp;
+
     public Action<Player> playerSpawned;
     public Action<Player> playerKilled;
 
@@ -29,6 +32,8 @@ public class GameManager : MonoBehaviour
 
     public bool GameIsPaused { get; private set; }
 
+    public int RoundDuration { get { return roundDuration; } }
+
     private void Awake()
     {
         if (Instance != null && Instance != this)
@@ -43,13 +48,16 @@ public class GameManager : MonoBehaviour
     {
         playersSpawner.SpawnPlayer1();
         playersSpawner.SpawnPlayer2();
-
-        roundTimer.StartRound(roundDuration);
     }
 
     public void RoundStart()
     {
+        if (onRoundStart != null)
+            onRoundStart.Invoke();
+
         GameIsPaused = false;
+
+        roundTimer.StartTimer();
     }
 
     public void RoundOver()
@@ -89,6 +97,12 @@ public class GameManager : MonoBehaviour
     {
         if (playerSpawned != null)
             playerSpawned.Invoke(player);
+    }
+
+    public void PowerUpWasPickedUp()
+    {
+        if (onPowerUpPickUp != null)
+            onPowerUpPickUp.Invoke();
     }
 
     public void LoadNextLevel()
