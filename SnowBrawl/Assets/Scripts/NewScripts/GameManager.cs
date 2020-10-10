@@ -7,6 +7,7 @@ public class GameManager : MonoBehaviour
     public static GameManager Instance;
 
     public Action onRoundStart;
+    public Action onRoundOver;
     public Action onPowerUpPickUp;
 
     public Action<Player> playerSpawned;
@@ -33,6 +34,9 @@ public class GameManager : MonoBehaviour
     public bool GameIsPaused { get; private set; }
 
     public int RoundDuration { get { return roundDuration; } }
+
+    private Player p1;
+    private Player p2;
 
     private void Awake()
     {
@@ -64,9 +68,10 @@ public class GameManager : MonoBehaviour
     {
         GameIsPaused = true;
 
-        //TODO: turn physics off to freeze players
-
         ShowRoundOverUI();
+
+        if (onRoundOver != null)
+            onRoundOver.Invoke();
     }
 
     private void ShowRoundOverUI()
@@ -95,6 +100,11 @@ public class GameManager : MonoBehaviour
 
     public void PlayerWasSpawned(Player player)
     {
+        if (player.PlayerID == PlayerID.P1)
+            p1 = player;
+        else
+            p2 = player;
+
         if (playerSpawned != null)
             playerSpawned.Invoke(player);
     }

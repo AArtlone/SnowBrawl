@@ -12,17 +12,23 @@ public class PlayerMovement: MonoBehaviour
 
     private void Awake()
     {
+        GameManager.onRoundOver += OnRoundOver;
+
         jumpKey = player.KeysSettings.jumpKey;
     }
 
     private void Start()
     {
-        mvSettings = GameManager.Instance.MVSettings;
+        mvSettings = GameManager.MVSettings;
+    }
+    private void OnRoundOver()
+    {
+        rbToMove.simulated = false;
     }
 
     private void FixedUpdate()
     {
-        if (GameManager.Instance.GameIsPaused)
+        if (GameManager.GameIsPaused)
             return;
 
         UpdateVelocity();
@@ -89,4 +95,6 @@ public class PlayerMovement: MonoBehaviour
             transform.localScale = new Vector3(-1, 1, 1);
         }
     }
+
+    private GameManager GameManager { get { return GameManager.Instance; } }
 }

@@ -3,7 +3,6 @@ using UnityEngine;
 
 public class PlayersSpawner : MonoBehaviour
 {
-    
     [Header("Player Prefabs")]
     [SerializeField] private Player p1Prefab;
     [SerializeField] private Player p2Prefab;

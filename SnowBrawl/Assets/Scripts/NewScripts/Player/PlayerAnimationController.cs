@@ -18,6 +18,16 @@ public class PlayerAnimationController : MonoBehaviour
     private bool isPickingUp;
     private bool isThrowing;
 
+    private void Awake()
+    {
+        GameManager.onRoundOver += OnRoundOver;
+    }
+
+    private void OnRoundOver()
+    {
+        animator.enabled = false;
+    }
+
     private void Update()
     {
         if (GameManager.Instance.GameIsPaused)
@@ -96,4 +106,6 @@ public class PlayerAnimationController : MonoBehaviour
 
         currentAnimationState = state;
     }
+
+    private GameManager GameManager { get { return GameManager.Instance; } }
 }

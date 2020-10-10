@@ -39,7 +39,6 @@ public class Player : MonoBehaviour
     public void EnteredHome(PlayerBase playerBase)
     {
         NearHome = true;
-        NearPickableBase = true;
 
         HomeBase = playerBase;
     }
@@ -47,7 +46,6 @@ public class Player : MonoBehaviour
     public void ExitedHome()
     {
         NearHome = false;
-        NearPickableBase = false;
 
         HomeBase = null;
     }
