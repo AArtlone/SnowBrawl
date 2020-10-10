@@ -7,16 +7,36 @@ public class PlayerAnimationController : MonoBehaviour
     [SerializeField] private Animator animator;
     [SerializeField] private GroundCheck groundCheck;
 
-    private static readonly int ANIMATOR_SPEED = Animator.StringToHash("speed");
-    private static readonly int ANIMATOR_GROUNDED = Animator.StringToHash("grounded");
-    private static readonly int ANIMATOR_SHOOTING = Animator.StringToHash("shooting");
-    private static readonly int ANIMATOR_PICKINGUP = Animator.StringToHash("picking up");
+    private static readonly int ANIMATOR_IDLE = Animator.StringToHash("Idle");
+    private static readonly int ANIMATOR_PICKUP = Animator.StringToHash("PickUp");
+    private static readonly int ANIMATOR_THROW = Animator.StringToHash("Throw");
+    private static readonly int ANIMATOR_WALK = Animator.StringToHash("Walk");
+    private static readonly int ANIMATOR_JUMP = Animator.StringToHash("Jump");
+
+    private int currentAnimationState;
+
+    private bool isPickingUp;
+    private bool isThrowing;
 
     private void Update()
     {
         if (GameManager.Instance.GameIsPaused)
             return;
 
+        if (isPickingUp || isThrowing)
+            return;
+
+        if (!groundCheck.IsGrounded)
+        {
+            ChangeAnimationState(ANIMATOR_JUMP);
+            return;
+        }
+
+        UpdateMovementAnimation();
+    }
+
+    private void UpdateMovementAnimation()
+    {
         string id = playerID.ToString();
 
         float horizontalInput = Input.GetAxisRaw(id + " Keyboard");
@@ -24,32 +44,56 @@ public class PlayerAnimationController : MonoBehaviour
         if (horizontalInput == 0)
             horizontalInput = Input.GetAxisRaw(id);
 
-        animator.SetFloat(ANIMATOR_SPEED, Mathf.Abs(horizontalInput));
-
-        animator.SetBool(ANIMATOR_GROUNDED, groundCheck.IsGrounded);
+        if (horizontalInput == 0)
+            ChangeAnimationState(ANIMATOR_IDLE);
+        else
+            ChangeAnimationState(ANIMATOR_WALK);
     }
 
-    public void ShootAnimation()
+    public void ThrowAnimation()
     {
-        StartCoroutine(ShootAnimationCo());
+        StartCoroutine(ThrowAnimationCo());
     }
 
-    private IEnumerator ShootAnimationCo()
+    private IEnumerator ThrowAnimationCo()
     {
-        animator.SetBool(ANIMATOR_SHOOTING, true);
+        isThrowing = true;
 
-        yield return new WaitForSeconds(.2f);
+        ChangeAnimationState(ANIMATOR_THROW);
 
-        animator.SetBool(ANIMATOR_SHOOTING, false);
+        float delay = animator.GetCurrentAnimatorStateInfo(0).length;
+
+        yield return new WaitForSeconds(delay + .1f);
+
+        isThrowing = true;
+
+        ChangeAnimationState(ANIMATOR_IDLE);
     }
 
     public void StartPickUpAnimation()
     {
-        animator.SetBool(ANIMATOR_PICKINGUP, true);
+        isPickingUp = true;
+
+        ChangeAnimationState(ANIMATOR_PICKUP);
     }
 
     public void StopPickUpAnimation()
     {
-        animator.SetBool(ANIMATOR_PICKINGUP, false);
+        if (!isPickingUp)
+            return;
+
+        isPickingUp = false;
+
+        ChangeAnimationState(ANIMATOR_IDLE);
+    }
+
+    private void ChangeAnimationState(int state)
+    {
+        if (currentAnimationState == state)
+            return;
+
+        animator.Play(state);
+
+        currentAnimationState = state;
     }
 }

@@ -32,7 +32,7 @@ public class PlayerActions: MonoBehaviour
             return;
 
         if (Input.GetKeyDown(throwKey))
-            Shoot();
+            Throw();
 
         if (Input.GetKeyDown(dropKey))
             Drop();
@@ -113,9 +113,9 @@ public class PlayerActions: MonoBehaviour
         player.RaiseSnowballChangedEvent();
     }
 
-    public void Shoot()
+    public void Throw()
     {
-        if (!CheckIfCanShoot())
+        if (!CheckIfCanThrow())
             return;
 
         isShooting = true;
@@ -125,9 +125,9 @@ public class PlayerActions: MonoBehaviour
             isShooting = false;
         });
 
-        snowballShooter.Shoot(player.FacingRight, player.PlayerID, doneShootingCallback);
+        snowballShooter.Throw(player.FacingRight, player.PlayerID, doneShootingCallback);
 
-        animationController.ShootAnimation();
+        animationController.ThrowAnimation();
 
         player.Inventory.Snowballs--;
 
@@ -174,7 +174,7 @@ public class PlayerActions: MonoBehaviour
         return true;
     }
 
-    private bool CheckIfCanShoot()
+    private bool CheckIfCanThrow()
     {
         if (player.Inventory.IsInventoryEmpty())
             return false;

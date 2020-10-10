@@ -11,7 +11,7 @@ public class SnowballShooter : MonoBehaviour
 
     private float speed = 20f; //TODO: move this somewhere
 
-    public void Shoot(bool facingRight, PlayerID playerID, Action doneShootingCallback)
+    public void Throw(bool facingRight, PlayerID playerID, Action doneShootingCallback)
     {
         StartCoroutine(ShootCo(facingRight, playerID, doneShootingCallback));
     }
