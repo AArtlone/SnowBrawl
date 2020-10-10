@@ -21,7 +21,8 @@ public class PlayersSpawner : MonoBehaviour
     {
         yield return new WaitForSeconds(playerRespawnTime);
 
-        // Check if the timer did not run out while it was waiting
+        if (GameManager.GameIsPaused)
+            yield break;
 
         if (playerID == PlayerID.P1)
             SpawnPlayer1();
@@ -33,13 +34,15 @@ public class PlayersSpawner : MonoBehaviour
     {
         Player player = Instantiate(p1Prefab, p1RespawnPos.position, Quaternion.identity);
 
-        GameManager.Instance.PlayerWasSpawned(player);
+        GameManager.PlayerWasSpawned(player);
     }
 
     public void SpawnPlayer2()
     {
         Player player = Instantiate(p2Prefab, p2RespawnPos.position, Quaternion.identity);
 
-        GameManager.Instance.PlayerWasSpawned(player);
+        GameManager.PlayerWasSpawned(player);
     }
+
+    private GameManager GameManager { get { return GameManager.Instance; } }
 }

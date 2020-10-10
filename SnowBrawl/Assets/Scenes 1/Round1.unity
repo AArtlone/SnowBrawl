@@ -3398,7 +3398,7 @@ MonoBehaviour:
   mvSettings: {fileID: 11400000, guid: 7fc12027f8ec85d47a3000e3129b819f, type: 2}
   playersSpawner: {fileID: 1029349934}
   roundTimer: {fileID: 1736299701}
-  roundDuration: 90
+  roundDuration: 10
   p1Base: {fileID: 1126772731947089}
   p2Base: {fileID: 1452183800217806}
   roundOverObject: {fileID: 276908571}

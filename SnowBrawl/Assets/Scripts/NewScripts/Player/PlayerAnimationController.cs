@@ -23,6 +23,11 @@ public class PlayerAnimationController : MonoBehaviour
         GameManager.onRoundOver += OnRoundOver;
     }
 
+    private void OnDestroy()
+    {
+        GameManager.onRoundOver -= OnRoundOver;
+    }
+
     private void OnRoundOver()
     {
         animator.enabled = false;
@@ -30,7 +35,7 @@ public class PlayerAnimationController : MonoBehaviour
 
     private void Update()
     {
-        if (GameManager.Instance.GameIsPaused)
+        if (GameManager.GameIsPaused)
             return;
 
         if (isPickingUp || isThrowing)

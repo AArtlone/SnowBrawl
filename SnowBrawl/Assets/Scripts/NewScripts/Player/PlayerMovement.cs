@@ -17,6 +17,11 @@ public class PlayerMovement: MonoBehaviour
         jumpKey = player.KeysSettings.jumpKey;
     }
 
+    private void OnDestroy()
+    {
+        GameManager.onRoundOver -= OnRoundOver;
+    }
+
     private void Start()
     {
         mvSettings = GameManager.MVSettings;
@@ -42,9 +47,9 @@ public class PlayerMovement: MonoBehaviour
 
     private void UpdateHorizontalVelocity()
     {
-        string id = player.PlayerID.ToString();
+        var id = player.PlayerID.ToString();
 
-        float horizontalInput = Input.GetAxisRaw(id + " Keyboard");
+        var horizontalInput = Input.GetAxisRaw(id + " Keyboard");
 
         if (horizontalInput == 0)
             horizontalInput = Input.GetAxisRaw(id);
@@ -57,14 +62,19 @@ public class PlayerMovement: MonoBehaviour
 
         FlipCharacter(horizontalInput);
 
-        float speed = mvSettings.speed;
+        var speed = mvSettings.speed;
 
         if (player.PowerUpsManager.HasPowerUp(PowerUpType.Boots))
             speed = mvSettings.poweredUpSpeed;
 
         rbToMove.AddForce(Vector2.right * speed * horizontalInput);
 
-        float horizontalVelocity = rbToMove.velocity.x;
+        ClampVelocity();
+    }
+
+    private void ClampVelocity()
+    {
+        var horizontalVelocity = rbToMove.velocity.x;
 
         horizontalVelocity = Mathf.Clamp(horizontalVelocity, mvSettings.minSpeed, mvSettings.maxSpeed);
 

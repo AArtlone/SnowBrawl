@@ -18,9 +18,9 @@ GameObject:
   - component: {fileID: 7871581718154758884}
   - component: {fileID: 7871581718154758885}
   - component: {fileID: 369006673973335446}
-  - component: {fileID: 7871581718154758887}
   - component: {fileID: 7871581718154758882}
   - component: {fileID: 3676448348844342042}
+  - component: {fileID: 6264038588335060404}
   m_Layer: 9
   m_Name: Player2
   m_TagString: Player2
@@ -298,7 +298,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 7871581718154758886}
-  snowballShooter: {fileID: 7871581718154758887}
+  snowballThrower: {fileID: 6264038588335060404}
   animationController: {fileID: 369006673973335446}
 --- !u!114 &369006673973335446
 MonoBehaviour:
@@ -315,21 +315,6 @@ MonoBehaviour:
   playerID: 1
   animator: {fileID: 7812062766972214817}
   groundCheck: {fileID: 7871924728401704998}
---- !u!114 &7871581718154758887
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7871581718154758883}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a605ad3e6f3860741a39e79ecfb33334, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  snowballPrefab: {fileID: 1248006794868032362, guid: ac92d3ce9cf304d46b87b80f99584b52,
-    type: 3}
-  shootingPoint: {fileID: 7868009395046208289}
 --- !u!114 &7871581718154758882
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -355,6 +340,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fee01f690c9e0424cbe16bd3868b87cb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &6264038588335060404
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7871581718154758883}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a5de5bce8848aee4c995813fced63bd8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  snowballPrefab: {fileID: 1248006794868032362, guid: ac92d3ce9cf304d46b87b80f99584b52,
+    type: 3}
+  throwingPoint: {fileID: 7868009395046208289}
 --- !u!1 &7871583142443685107
 GameObject:
   m_ObjectHideFlags: 0
@@ -365,7 +365,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7868009395046208289}
   m_Layer: 0
-  m_Name: ShootingPoint
+  m_Name: ThrowingPoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -456,7 +456,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cf607c99b77b71d4ba1c1af7b3c25aec, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  groundCheckCol: {fileID: 7871924728401705049}
 --- !u!50 &7871924728401705048
 Rigidbody2D:
   serializedVersion: 4

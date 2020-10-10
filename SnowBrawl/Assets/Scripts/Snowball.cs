@@ -6,7 +6,7 @@ public class Snowball : MonoBehaviour
 
     private PlayerID shooterID;
 
-    public void Shoot(Vector2 direction, float speed, PlayerID shooterID)
+    public void Throw(Vector2 direction, float speed, PlayerID shooterID)
     {
         rb.velocity = direction * speed;
 
@@ -34,7 +34,6 @@ public class Snowball : MonoBehaviour
         if (player.PlayerID == shooterID)
             return;
 
-        // TODO: Kill other player
         GameManager.Instance.KillPlayer(player);
 
         Destroy(gameObject);

@@ -5,7 +5,7 @@ public class PlayerActions: MonoBehaviour
 {
     [SerializeField] private Player player;
 
-    [SerializeField] private SnowballShooter snowballShooter;
+    [SerializeField] private SnowballThrower snowballThrower;
 
     [SerializeField] private PlayerAnimationController animationController;
 
@@ -37,23 +37,23 @@ public class PlayerActions: MonoBehaviour
         if (Input.GetKeyDown(dropKey))
             Drop();
 
-        CheckForPickUpAction();
+        PickUpAction();
     }
 
-    private void CheckForPickUpAction()
+    private void PickUpAction()
     {
         if (player.NearPickableBase)
-            CheckForPickUp();
+            TryToPickUp();
         else if (player.NearEnemyBase)
-            CheckForSteal();
+            TryToSteal();
     }
 
-    private void CheckForPickUp()
+    private void TryToPickUp()
     {
         if (!CheckIfCanPickUp())
             return;
 
-        if (!WHATONAMETHIS())
+        if (!CheckIfPickUpWasSuccessful())
             return;
 
         PickUp();
@@ -62,12 +62,12 @@ public class PlayerActions: MonoBehaviour
             animationController.StopPickUpAnimation();
     }
 
-    private void CheckForSteal()
+    private void TryToSteal()
     {
         if (!CheckIfCanSteal())
             return;
 
-        if (!WHATONAMETHIS())
+        if (!CheckIfPickUpWasSuccessful())
             return;
 
         PickUp();
@@ -76,8 +76,8 @@ public class PlayerActions: MonoBehaviour
             animationController.StopPickUpAnimation();
     }
 
-    //TODO: rename
-    private bool WHATONAMETHIS()
+    // Checks if pick up action was succesfull or not based on the player input
+    private bool CheckIfPickUpWasSuccessful()
     {
         bool pickUpKeyIsDown = Input.GetKey(pickUpKey);
 
@@ -125,7 +125,7 @@ public class PlayerActions: MonoBehaviour
             isShooting = false;
         });
 
-        snowballShooter.Throw(player.FacingRight, player.PlayerID, doneShootingCallback);
+        snowballThrower.Throw(player.FacingRight, player.PlayerID, doneShootingCallback);
 
         animationController.ThrowAnimation();
 
@@ -149,14 +149,15 @@ public class PlayerActions: MonoBehaviour
         player.RaiseSnowballChangedEvent();
     }
 
+    #region HelpFunctions
     private bool CheckIfCanPickUp()
     {
         if (player.Inventory.IsInventoryFull())
             return false;
-        
+
         if (!player.NearPickableBase)
             return false;
-        
+
         return true;
     }
 
@@ -164,7 +165,7 @@ public class PlayerActions: MonoBehaviour
     {
         if (player.Inventory.IsInventoryFull())
             return false;
-        
+
         if (!player.NearEnemyBase)
             return false;
 
@@ -193,5 +194,6 @@ public class PlayerActions: MonoBehaviour
             return false;
         else
             return true;
-    }
+    } 
+    #endregion
 }

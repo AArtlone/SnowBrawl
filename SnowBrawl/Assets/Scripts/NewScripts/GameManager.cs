@@ -35,9 +35,6 @@ public class GameManager : MonoBehaviour
 
     public int RoundDuration { get { return roundDuration; } }
 
-    private Player p1;
-    private Player p2;
-
     private void Awake()
     {
         if (Instance != null && Instance != this)
@@ -66,12 +63,12 @@ public class GameManager : MonoBehaviour
 
     public void RoundOver()
     {
+        if (onRoundOver != null)
+            onRoundOver.Invoke();
+     
         GameIsPaused = true;
 
         ShowRoundOverUI();
-
-        if (onRoundOver != null)
-            onRoundOver.Invoke();
     }
 
     private void ShowRoundOverUI()
@@ -100,11 +97,6 @@ public class GameManager : MonoBehaviour
 
     public void PlayerWasSpawned(Player player)
     {
-        if (player.PlayerID == PlayerID.P1)
-            p1 = player;
-        else
-            p2 = player;
-
         if (playerSpawned != null)
             playerSpawned.Invoke(player);
     }
