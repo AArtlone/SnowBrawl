@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 553aaff67253d6641a23a38e84ae3819, type: 3}
   m_Name: MovementSettings
   m_EditorClassIdentifier: 
-  speed: 650
+  speed: 600
   poweredUpSpeed: 1000
   springAbility: 18
   fallMultiplier: 15

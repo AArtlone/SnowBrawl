@@ -42,9 +42,15 @@ public class PowerUpsSpawner : MonoBehaviour
     {
         yield return new WaitForSeconds(spawnDelay);
 
+        if (GameManager.GameIsPaused)
+            yield break;
+
         GameObject powerUp = Instantiate(GetRandomPrefab(), GetRandomPosition(), Quaternion.identity);
 
         yield return new WaitForSeconds(powerUpExistanceDuration);
+        
+        if (GameManager.GameIsPaused)
+            yield break;
 
         if (powerUp == null)
             yield break;

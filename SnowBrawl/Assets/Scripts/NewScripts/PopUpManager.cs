@@ -31,7 +31,7 @@ public class PopUpManager : MonoBehaviour
 
     public void PickedUpSnowball(Player player)
     {
-        PositionEffect effect = InstantiateIcon(player.PlayerCanvas, playerCanvasIconsCounter, pickedUpSnowballIconPrefab, 0f, 10f);
+        PositionEffect effect = InstantiateIcon(player.PlayerCanvas, playerCanvasIconsCounter, pickedUpSnowballIconPrefab, -4f, 10f);
 
         if (effect == null)
             return;

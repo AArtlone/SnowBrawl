@@ -58,6 +58,18 @@ public class SBInputManager : MonoBehaviour
         };
     }
 
+    public float GetPlayerInput(PlayerID id)
+    {
+        string stringID = id.ToString();
+
+        float horizontalInput = Input.GetAxisRaw(stringID + " Keyboard");
+
+        if (horizontalInput == 0)
+            horizontalInput = Input.GetAxisRaw(stringID);
+
+        return horizontalInput;
+    }
+
     public KeyCode IsAnyCustomKeyIsDown()
     {
         foreach (var customKey in myKeys)

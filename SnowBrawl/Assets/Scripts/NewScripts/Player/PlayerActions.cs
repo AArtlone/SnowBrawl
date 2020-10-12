@@ -84,7 +84,9 @@ public class PlayerActions: MonoBehaviour
         if (pickUpKeyIsDown && player.PowerUpsManager.HasPowerUp(PowerUpType.Gloves))
             return true;
 
-        if (!pickUpKeyIsDown)
+        var horizontalInput = SBInputManager.Instance.GetPlayerInput(player.PlayerID);
+
+        if (horizontalInput != 0 || !pickUpKeyIsDown)
         {
             animationController.StopPickUpAnimation();
             pickUpKeyDownTime = 0;
@@ -111,8 +113,6 @@ public class PlayerActions: MonoBehaviour
             player.EnemyBase.Snowballs--;
 
         PopUpManager.Instance.PickedUpSnowball(player);
-
-        player.RaiseSnowballChangedEvent();
     }
 
     public void Throw()
@@ -132,8 +132,6 @@ public class PlayerActions: MonoBehaviour
         animationController.ThrowAnimation();
 
         player.Inventory.Snowballs--;
-
-        player.RaiseSnowballChangedEvent();
     }
 
     public void Drop()
@@ -151,8 +149,6 @@ public class PlayerActions: MonoBehaviour
         //TODO: playsound
 
         PopUpManager.Instance.DroppedSnowballPopUp(homeBase);
-
-        player.RaiseSnowballChangedEvent();
     }
 
     #region HelpFunctions

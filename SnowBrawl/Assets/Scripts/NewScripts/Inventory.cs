@@ -1,8 +1,28 @@
 ﻿public class Inventory
 {
-    public int maximumSnowballs = 2;
+    public readonly int maximumSnowballs = 2;
 
-    public int Snowballs { get; set; }
+    private int snowballs;
+
+    private Player player;
+
+    public int Snowballs
+    {
+        get
+        {
+            return snowballs;
+        }
+        set
+        {
+            snowballs = value;
+            player.RaiseSnowballChangedEvent();
+        }
+    }
+
+    public Inventory(Player player)
+    {
+        this.player = player;
+    }
 
     public bool IsInventoryFull()
     {

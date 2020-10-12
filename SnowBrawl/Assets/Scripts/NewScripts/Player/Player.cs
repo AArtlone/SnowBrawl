@@ -27,7 +27,7 @@ public class Player : MonoBehaviour
 
     private void Start()
     {
-        Inventory = new Inventory();
+        Inventory = new Inventory(this);
     }
 
     public void ReceivePowerUp(PowerUpData powerUpData)
@@ -79,8 +79,6 @@ public class Player : MonoBehaviour
     public void Kill()
     {
         Inventory.Snowballs = 0;
-
-        RaiseSnowballChangedEvent();
 
         Destroy(gameObject);
     }

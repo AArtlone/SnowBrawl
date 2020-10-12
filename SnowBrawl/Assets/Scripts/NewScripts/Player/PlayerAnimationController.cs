@@ -7,13 +7,19 @@ public class PlayerAnimationController : MonoBehaviour
     [SerializeField] private Animator animator;
     [SerializeField] private GroundCheck groundCheck;
 
-    private static readonly int ANIMATOR_IDLE = Animator.StringToHash("Idle");
-    private static readonly int ANIMATOR_PICKUP = Animator.StringToHash("PickUp");
-    private static readonly int ANIMATOR_THROW = Animator.StringToHash("Throw");
-    private static readonly int ANIMATOR_WALK = Animator.StringToHash("Walk");
-    private static readonly int ANIMATOR_JUMP = Animator.StringToHash("Jump");
+    //private static readonly int ANIMATOR_IDLE = Animator.StringToHash("Idle");
+    //private static readonly int ANIMATOR_PICKUP = Animator.StringToHash("PickUp");
+    //private static readonly int ANIMATOR_THROW = Animator.StringToHash("Throw");
+    //private static readonly int ANIMATOR_WALK = Animator.StringToHash("Walk");
+    //private static readonly int ANIMATOR_JUMP = Animator.StringToHash("Jump");
 
-    private int currentAnimationState;
+    private static readonly string ANIMATOR_IDLE = "Idle";
+    private static readonly string ANIMATOR_PICKUP = "PickUp";
+    private static readonly string ANIMATOR_THROW = "Throw";
+    private static readonly string ANIMATOR_WALK = "Walk";
+    private static readonly string ANIMATOR_JUMP = "Jump";
+
+    private string currentAnimationState;
 
     private bool isPickingUp;
     private bool isThrowing;
@@ -38,7 +44,7 @@ public class PlayerAnimationController : MonoBehaviour
         if (GameManager.GameIsPaused)
             return;
 
-        if (isPickingUp || isThrowing)
+        if (isThrowing)
             return;
 
         if (!groundCheck.IsGrounded)
@@ -52,16 +58,11 @@ public class PlayerAnimationController : MonoBehaviour
 
     private void UpdateMovementAnimation()
     {
-        string id = playerID.ToString();
+        float horizontalInput = SBInputManager.Instance.GetPlayerInput(playerID);
 
-        float horizontalInput = Input.GetAxisRaw(id + " Keyboard");
-
-        if (horizontalInput == 0)
-            horizontalInput = Input.GetAxisRaw(id);
-
-        if (horizontalInput == 0)
+        if (horizontalInput == 0 && !isPickingUp)
             ChangeAnimationState(ANIMATOR_IDLE);
-        else
+        else if (horizontalInput != 0)
             ChangeAnimationState(ANIMATOR_WALK);
     }
 
@@ -80,7 +81,7 @@ public class PlayerAnimationController : MonoBehaviour
 
         yield return new WaitForSeconds(delay + .1f);
 
-        isThrowing = true;
+        isThrowing = false;
 
         ChangeAnimationState(ANIMATOR_IDLE);
     }
@@ -102,7 +103,7 @@ public class PlayerAnimationController : MonoBehaviour
         ChangeAnimationState(ANIMATOR_IDLE);
     }
 
-    private void ChangeAnimationState(int state)
+    private void ChangeAnimationState(string state)
     {
         if (currentAnimationState == state)
             return;

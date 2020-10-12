@@ -47,12 +47,7 @@ public class PlayerMovement: MonoBehaviour
 
     private void UpdateHorizontalVelocity()
     {
-        var id = player.PlayerID.ToString();
-
-        var horizontalInput = Input.GetAxisRaw(id + " Keyboard");
-
-        if (horizontalInput == 0)
-            horizontalInput = Input.GetAxisRaw(id);
+        var horizontalInput = SBInputManager.Instance.GetPlayerInput(player.PlayerID);
 
         if (horizontalInput == 0)
         {

@@ -6,6 +6,21 @@ public class Snowball : MonoBehaviour
 
     private PlayerID shooterID;
 
+    private void Awake()
+    {
+        GameManager.onRoundOver += OnRoundOver;
+    }
+
+    private void OnDestroy()
+    {
+        GameManager.onRoundOver -= OnRoundOver;
+    }
+
+    private void OnRoundOver()
+    {
+        rb.simulated = false;
+    }
+
     public void Throw(Vector2 direction, float speed, PlayerID shooterID)
     {
         rb.velocity = direction * speed;
@@ -34,8 +49,10 @@ public class Snowball : MonoBehaviour
         if (player.PlayerID == shooterID)
             return;
 
-        GameManager.Instance.KillPlayer(player);
+        GameManager.KillPlayer(player);
 
         Destroy(gameObject);
     }
+
+    private GameManager GameManager { get { return GameManager.Instance; } }
 }

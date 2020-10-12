@@ -9,6 +9,7 @@ public class SnowballThrower : MonoBehaviour
 
     private const float throwingAnimDuration = .25f; //TODO: get animation duration from the anim controller;
     private const float speed = 20f;
+    private const float snowballDestroyDelay = 5f;
 
     public void Throw(bool facingRight, PlayerID playerID, Action doneShootingCallback)
     {
@@ -26,6 +27,16 @@ public class SnowballThrower : MonoBehaviour
 
         if (doneShootingCallback != null)
             doneShootingCallback();
+
+        yield return new WaitForSeconds(snowballDestroyDelay);
+
+        if (GameManager.Instance.GameIsPaused)
+            yield break;
+
+        if (snowball == null)
+            yield break;
+
+        Destroy(snowball.gameObject);
     }
 
     private Vector2 GetThrowingDirection(bool facingRight)
