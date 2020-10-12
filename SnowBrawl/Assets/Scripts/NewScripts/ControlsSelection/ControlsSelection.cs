@@ -144,7 +144,7 @@ public class ControlsSelection : MonoBehaviour
         listeningToControlSelection = true;
     }
 
-    public void StartGame()
+    public void LoadTutorial()
     {
         SBSceneManager.Instance.LoadTutorial();
     }

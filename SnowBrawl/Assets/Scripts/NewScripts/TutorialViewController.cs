@@ -58,4 +58,9 @@ public class TutorialViewController : MonoBehaviour
     {
         confirmationPopUp.SetActive(true);
     }
+
+    public void LoadGame()
+    {
+        SBSceneManager.Instance.LoadFirstRound();
+    }
 }
