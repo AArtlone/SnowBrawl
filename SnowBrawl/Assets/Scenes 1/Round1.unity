@@ -1187,7 +1187,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fc39a05927eef9740af0b259ac40bcdf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  iconPrefab: {fileID: 5045407280638992435, guid: cdaa30508dc60e74dacafcb663321726,
+  droppedSnowballIconPrefab: {fileID: 5045407280638992435, guid: cdaa30508dc60e74dacafcb663321726,
+    type: 3}
+  pickedUpSnowballIconPrefab: {fileID: 3319129345853424969, guid: a694c8d9cbeb86d42803465613cda3b2,
     type: 3}
 --- !u!4 &469236346
 Transform:

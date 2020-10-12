@@ -93,6 +93,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2dd7068b8abfdc440b8175c38655f32b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerCanvasIconPrefab: {fileID: 1839749648166742216, guid: 0a744a96dc82a9b49aaf94bd17870fbb,
+    type: 3}
   powerUpIcon: {fileID: 21300000, guid: e1310d7931b578549a12ee2e608c2c03, type: 3}
   powerUpType: 0
   powerUpDuration: 10

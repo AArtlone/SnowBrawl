@@ -10,10 +10,12 @@ public class Player : MonoBehaviour
     [SerializeField] private PlayerID playerID;
     [SerializeField] private KeysSettings keysSettings;
     [SerializeField] private PowerUpsManager powerUpsManager;
+    [SerializeField] private Transform playerCanvas;
 
     public PlayerID PlayerID { get { return playerID; } }
     public KeysSettings KeysSettings { get { return keysSettings; } }
     public PowerUpsManager PowerUpsManager { get { return powerUpsManager; } }
+    public Transform PlayerCanvas { get { return playerCanvas; } }
     public Inventory Inventory { get; private set; }
     public PlayerBase HomeBase { get; private set; }
     public PlayerBase EnemyBase { get; private set; }

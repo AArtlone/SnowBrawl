@@ -110,6 +110,8 @@ public class PlayerActions: MonoBehaviour
         if (player.NearEnemyBase)
             player.EnemyBase.Snowballs--;
 
+        PopUpManager.Instance.PickedUpSnowball(player);
+
         player.RaiseSnowballChangedEvent();
     }
 

@@ -42,7 +42,16 @@ public class PowerUpsSpawner : MonoBehaviour
     {
         yield return new WaitForSeconds(spawnDelay);
 
-        Instantiate(GetRandomPrefab(), GetRandomPosition(), Quaternion.identity);
+        GameObject powerUp = Instantiate(GetRandomPrefab(), GetRandomPosition(), Quaternion.identity);
+
+        yield return new WaitForSeconds(powerUpExistanceDuration);
+
+        if (powerUp == null)
+            yield break;
+
+        Destroy(powerUp);
+
+        SpawnPowerUp();
     }
 
     private GameObject GetRandomPrefab()

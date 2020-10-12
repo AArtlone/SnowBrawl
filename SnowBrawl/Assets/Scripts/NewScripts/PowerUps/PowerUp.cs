@@ -2,6 +2,7 @@
 
 public class PowerUp : MonoBehaviour
 {
+    [SerializeField] private RectTransform playerCanvasIconPrefab;
     [SerializeField] private Sprite powerUpIcon;
     
     [SerializeField] private PowerUpType powerUpType;
@@ -21,6 +22,8 @@ public class PowerUp : MonoBehaviour
         var powerUpData = new PowerUpData(player.PlayerID, powerUpType, powerUpIcon, powerUpDuration);
 
         player.ReceivePowerUp(powerUpData);
+
+        PopUpManager.Instance.PowerUpPickedUp(player, playerCanvasIconPrefab);
 
         GameManager.Instance.PowerUpWasPickedUp();
 

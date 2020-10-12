@@ -5,9 +5,11 @@ public class PopUpManager : MonoBehaviour
 {
     public static PopUpManager Instance;
 
-    [SerializeField] private RectTransform iconPrefab;
+    [SerializeField] private RectTransform droppedSnowballIconPrefab;
+    [SerializeField] private RectTransform pickedUpSnowballIconPrefab;
 
-    private int counter;
+    private int playerBaseCanvasIconsCounter;
+    private int playerCanvasIconsCounter;
 
     private void Awake()
     {
@@ -17,40 +19,81 @@ public class PopUpManager : MonoBehaviour
             Instance = this;
     }
 
+    public void PowerUpPickedUp(Player player, RectTransform prefab)
+    {
+        PositionEffect effect = InstantiateIcon(player.PlayerCanvas, playerCanvasIconsCounter, prefab, 0f, 10f);
+
+        if (effect == null)
+            return;
+
+        StartCoroutine(PlayerCanvasIconCo(effect));
+    }
+
+    public void PickedUpSnowball(Player player)
+    {
+        PositionEffect effect = InstantiateIcon(player.PlayerCanvas, playerCanvasIconsCounter, pickedUpSnowballIconPrefab, 0f, 10f);
+
+        if (effect == null)
+            return;
+
+        StartCoroutine(PlayerCanvasIconCo(effect));
+    }
+
     public void DroppedSnowballPopUp(PlayerBase playerBase)
+    {
+        PositionEffect effect = InstantiateIcon(playerBase.Canvas, playerBaseCanvasIconsCounter, droppedSnowballIconPrefab, -20f, 30f);
+
+        if (effect == null)
+            return;
+
+        StartCoroutine(PlayerBaseCanvasIconCo(effect));
+    }
+
+    private PositionEffect InstantiateIcon(Transform canvas, int counter, RectTransform prefab, float ySpawnPosOffset, float effectYTargetOffset)
     {
         RectTransform icon;
         if (counter == 0)
-            icon = Instantiate(iconPrefab, playerBase.Canvas.transform);
+            icon = Instantiate(prefab, canvas.transform);
         else
         {
-            icon = Instantiate(iconPrefab, playerBase.Canvas.transform);
+            icon = Instantiate(prefab, canvas.transform);
 
-            icon.localPosition = new Vector2(0, counter * -20f);
+            icon.localPosition = new Vector2(0, counter * ySpawnPosOffset);
         }
 
         PositionEffect effect = icon.GetComponent<PositionEffect>();
 
         if (effect == null)
-            return;
+            return null;
 
         float yPos = icon.localPosition.y;
 
-        effect.SetStartAndTargetValues(new Vector2(0, yPos), new Vector2(0, yPos + 30f));
+        effect.SetStartAndTargetValues(new Vector2(0, yPos), new Vector2(0, yPos + effectYTargetOffset));
 
         effect.PlayEffect();
 
-        StartCoroutine(DroppedSnowbalPopUpCo(effect));
+        return effect;
     }
 
-    private IEnumerator DroppedSnowbalPopUpCo(EffectBase effect)
+    private IEnumerator PlayerCanvasIconCo(EffectBase effect)
     {
-        counter++;
+        playerCanvasIconsCounter++;
+
+        yield return new WaitForSeconds(effect.tween.targetTime);
+
+        //Destroy(effect.gameObject);
+
+        playerCanvasIconsCounter--;
+    }
+
+    private IEnumerator PlayerBaseCanvasIconCo(EffectBase effect)
+    {
+        playerBaseCanvasIconsCounter++;
 
         yield return new WaitForSeconds(effect.tween.targetTime);
 
         Destroy(effect.gameObject);
 
-        counter--;
+        playerBaseCanvasIconsCounter--;
     }
 }
