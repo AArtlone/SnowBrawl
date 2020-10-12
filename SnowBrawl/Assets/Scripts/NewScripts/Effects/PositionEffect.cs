@@ -18,6 +18,22 @@ public class PositionEffect : Effect<Vector3>
     {
         base.Reset();
 
+        print("reseting");
+
         transform.localPosition = startValue;
+    }
+
+    public override void PlayEffect()
+    {
+        if (useCurrentValueAsStart)
+            startValue = transform.localPosition;
+        
+        base.PlayEffect();
+    }
+
+    public void SetStartAndTargetValues(Vector2 startValue, Vector2 targetValue)
+    {
+        this.startValue = startValue;
+        this.targetValue = targetValue;
     }
 }

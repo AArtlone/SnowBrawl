@@ -6,8 +6,10 @@ public class PlayerBase : PickableBase
     public Action<int> snowballsChanged;
 
     [SerializeField] private PlayerID playerID;
+    [SerializeField] private Transform canvas;
 
     public PlayerID PlayerID { get { return playerID; } }
+    public Transform Canvas { get { return canvas; } }
 
     private int snowballs;
     public int Snowballs {

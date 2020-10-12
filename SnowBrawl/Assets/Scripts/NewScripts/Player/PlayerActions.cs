@@ -146,6 +146,10 @@ public class PlayerActions: MonoBehaviour
 
         player.Inventory.Snowballs--;
 
+        //TODO: playsound
+
+        PopUpManager.Instance.DroppedSnowballPopUp(homeBase);
+
         player.RaiseSnowballChangedEvent();
     }
 

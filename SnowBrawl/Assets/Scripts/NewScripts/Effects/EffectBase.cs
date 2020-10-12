@@ -2,7 +2,9 @@
 
 public abstract class EffectBase : MonoBehaviour
 {
+    public bool autoReset;
     public bool playOnStart;
+    public bool useCurrentValueAsStart;
     
     public Tween tween;
     
@@ -16,8 +18,11 @@ public abstract class EffectBase : MonoBehaviour
 
     private float delayTimeLeft;
 
-    private void Awake()
+    protected virtual void Awake()
     {
+        if (!autoReset)
+            return;
+
         Reset();
     }
 
@@ -100,7 +105,7 @@ public abstract class EffectBase : MonoBehaviour
         }
     }
 
-    public void PlayEffect()
+    public virtual void PlayEffect()
     {
         playEffect = true;
     }

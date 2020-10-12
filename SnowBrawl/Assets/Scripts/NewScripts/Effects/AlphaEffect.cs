@@ -5,6 +5,13 @@ public class AlphaEffect : Effect<float>
 {
     private CanvasGroup canvasGroup;
 
+    protected override void Awake()
+    {
+        base.Awake();
+
+        canvasGroup = GetComponent<CanvasGroup>();
+    }
+
     protected override void ApplyEffect()
     {
         canvasGroup.alpha = GetNextValue();
@@ -20,8 +27,6 @@ public class AlphaEffect : Effect<float>
     protected override void Reset()
     {
         base.Reset();
-
-        canvasGroup = GetComponent<CanvasGroup>();
 
         canvasGroup.alpha = startValue;
     }
