@@ -1,10 +1,11 @@
 ﻿using UnityEngine;
 
-public class ImprovedJump : MonoBehaviour {
+[RequireComponent(typeof(Rigidbody2D))]
+public class ImprovedJump : MonoBehaviour 
+{
+    [SerializeField] float fallMultiplier;
 
-    public float fallMultiplier = 2.5f;
-
-    Rigidbody2D rb;
+    private Rigidbody2D rb;
 
     private void Awake()
     {
@@ -13,10 +14,7 @@ public class ImprovedJump : MonoBehaviour {
 
     public void Update()
     {
-        if(rb.velocity.y < 0 )
-        {
+        if(rb.velocity.y < 0)
             rb.velocity += Vector2.up * Physics2D.gravity.y * (fallMultiplier - 1) * Time.deltaTime; 
-        } 
     }
-
 }

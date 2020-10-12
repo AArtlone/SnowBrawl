@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 553aaff67253d6641a23a38e84ae3819, type: 3}
   m_Name: MovementSettings
   m_EditorClassIdentifier: 
-  speed: 500
+  speed: 650
   poweredUpSpeed: 1000
-  springAbility: 25
-  minSpeed: -0.5
+  springAbility: 18
+  minSpeed: -1
   maxSpeed: 0.5
