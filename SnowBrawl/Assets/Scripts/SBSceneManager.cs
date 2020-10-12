@@ -8,6 +8,7 @@ public class SBSceneManager : MonoBehaviour
 
     [SerializeField] private string loadingSceneName;
     [SerializeField] private string controlsSceneName;
+    [SerializeField] private string tutorialSceneName;
     [SerializeField] private string[] roundsSceneNames;
 
     public int LoadingOperationProgress { get; private set; }
@@ -24,6 +25,11 @@ public class SBSceneManager : MonoBehaviour
 
             DontDestroyOnLoad(this);
         }
+    }
+
+    public void LoadTutorial()
+    {
+        StartCoroutine(LoadSceneCo(tutorialSceneName));
     }
     
     public void LoadControlsCustomization()

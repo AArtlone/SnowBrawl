@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 8717792716162610780}
   - component: {fileID: 8717792716162610779}
   m_Layer: 0
-  m_Name: SceneManager
+  m_Name: SBSceneManager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -45,6 +45,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   loadingSceneName: LoadingScene
   controlsSceneName: ControlsSelection
+  tutorialSceneName: Tutorial
   roundsSceneNames:
   - Round1
   - Round2

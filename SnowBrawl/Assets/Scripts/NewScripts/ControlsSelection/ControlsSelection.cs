@@ -146,7 +146,7 @@ public class ControlsSelection : MonoBehaviour
 
     public void StartGame()
     {
-        SBSceneManager.Instance.LoadFirstRound();
+        SBSceneManager.Instance.LoadTutorial();
     }
 
     public void ShowConfirmationPopUp()
@@ -161,11 +161,6 @@ public class ControlsSelection : MonoBehaviour
         {
             confirmationPopUp.SetActive(true);
         }
-    }
-
-    public void ClosePopUp(GameObject obj)
-    {
-        obj.SetActive(false);
     }
 
     private bool CheckIfAllBindingsWereAssigned()

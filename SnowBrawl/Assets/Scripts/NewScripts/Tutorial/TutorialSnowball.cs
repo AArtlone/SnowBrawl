@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody2D))]
 public class TutorialSnowball : MonoBehaviour
@@ -10,6 +8,8 @@ public class TutorialSnowball : MonoBehaviour
     private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
+
+        Destroy(gameObject, 5f);
     }
 
     public void Shoot(Vector2 direction, float speed)

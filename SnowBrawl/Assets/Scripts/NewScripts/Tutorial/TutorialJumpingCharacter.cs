@@ -1,56 +1,60 @@
 ﻿using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody2D), typeof(Animator))]
-public class TutorialJumpingCharacter : MonoBehaviour
+public class TutorialJumpingCharacter : TutorialCharacter
 {
     [SerializeField] private float jumpValue;
-    [SerializeField] private float jumpFrequency;
-    [SerializeField] private float initialDelay;
-    [SerializeField] private GroundCheck groundCheck;
 
-    private static readonly int ANIMATOR_GROUNDED = Animator.StringToHash("grounded");
+    private static readonly int ANIMATOR_JUMP = Animator.StringToHash("Jump");
+    private static readonly int ANIMATOR_IDLE = Animator.StringToHash("Idle");
 
     private Rigidbody2D rb;
-    private Animator animator;
 
-    private float currentTime;
+    private Vector2 spawnPos;
 
-    private bool passedInitialDelay;
+    private int currentAnimationState;
 
-    private void Awake()
+    protected override void Awake()
     {
+        base.Awake();
+        
         rb = GetComponent<Rigidbody2D>();
 
-        animator = GetComponent<Animator>();
+        spawnPos = transform.position;
     }
 
-    private void Update()
+    private void OnTriggerEnter2D(Collider2D col)
     {
-        currentTime += Time.deltaTime;
-        
-        if (!passedInitialDelay)
-        {
-            if (currentTime < initialDelay)
-                return;
-
-            passedInitialDelay = true;
-            currentTime = 0;
-        }
-
-        print("waiting to jump");
-
-        if (currentTime >= jumpFrequency)
-        {
+        if (col.CompareTag("Ground"))
+            ChangeAnimationState(ANIMATOR_IDLE);
+        else if (col.GetComponent<TutorialSnowball>() != null)
             Jump();
+    }
 
-            currentTime = 0;
-        }
+    private void OnEnable()
+    {
+        animator.Play(ANIMATOR_IDLE);
+    }
 
-        animator.SetBool(ANIMATOR_GROUNDED, groundCheck.IsGrounded);
+    private void OnDisable()
+    {
+        transform.position = spawnPos;
     }
 
     private void Jump()
     {
+        ChangeAnimationState(ANIMATOR_JUMP);
+
         rb.velocity = Vector2.up * jumpValue;
+    }
+
+    private void ChangeAnimationState(int state)
+    {
+        if (currentAnimationState == state)
+            return;
+        
+        animator.Play(state);
+        
+        currentAnimationState = state;
     }
 }

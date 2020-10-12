@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class TutorialWalkingCharacter : MonoBehaviour
 {
@@ -11,6 +9,13 @@ public class TutorialWalkingCharacter : MonoBehaviour
     [SerializeField] private bool facingRight;
 
     private float travelTime;
+
+    private float scaleValue;
+
+    private void Awake()
+    {
+        scaleValue = transform.localScale.y;
+    }
 
     private void Update()
     {
@@ -44,8 +49,8 @@ public class TutorialWalkingCharacter : MonoBehaviour
         facingRight = !facingRight;
 
         if (!facingRight)
-            transform.localScale = new Vector3(-22f, 22f, 22f);
+            transform.localScale = new Vector3(-scaleValue, scaleValue, scaleValue);
         else
-            transform.localScale = new Vector3(22f, 22f, 22f);
+            transform.localScale = new Vector3(scaleValue, scaleValue, scaleValue);
     }
 }

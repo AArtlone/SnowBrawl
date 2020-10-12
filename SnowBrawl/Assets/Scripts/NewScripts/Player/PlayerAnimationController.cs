@@ -7,19 +7,13 @@ public class PlayerAnimationController : MonoBehaviour
     [SerializeField] private Animator animator;
     [SerializeField] private GroundCheck groundCheck;
 
-    //private static readonly int ANIMATOR_IDLE = Animator.StringToHash("Idle");
-    //private static readonly int ANIMATOR_PICKUP = Animator.StringToHash("PickUp");
-    //private static readonly int ANIMATOR_THROW = Animator.StringToHash("Throw");
-    //private static readonly int ANIMATOR_WALK = Animator.StringToHash("Walk");
-    //private static readonly int ANIMATOR_JUMP = Animator.StringToHash("Jump");
+    private static readonly int ANIMATOR_IDLE = Animator.StringToHash("Idle");
+    private static readonly int ANIMATOR_PICKUP = Animator.StringToHash("PickUp");
+    private static readonly int ANIMATOR_THROW = Animator.StringToHash("Throw");
+    private static readonly int ANIMATOR_WALK = Animator.StringToHash("Walk");
+    private static readonly int ANIMATOR_JUMP = Animator.StringToHash("Jump");
 
-    private static readonly string ANIMATOR_IDLE = "Idle";
-    private static readonly string ANIMATOR_PICKUP = "PickUp";
-    private static readonly string ANIMATOR_THROW = "Throw";
-    private static readonly string ANIMATOR_WALK = "Walk";
-    private static readonly string ANIMATOR_JUMP = "Jump";
-
-    private string currentAnimationState;
+    private int currentAnimationState;
 
     private bool isPickingUp;
     private bool isThrowing;
@@ -103,7 +97,7 @@ public class PlayerAnimationController : MonoBehaviour
         ChangeAnimationState(ANIMATOR_IDLE);
     }
 
-    private void ChangeAnimationState(string state)
+    private void ChangeAnimationState(int state)
     {
         if (currentAnimationState == state)
             return;

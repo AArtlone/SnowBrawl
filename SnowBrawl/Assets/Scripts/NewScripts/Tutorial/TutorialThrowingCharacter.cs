@@ -3,51 +3,97 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [RequireComponent(typeof(Animator))]
-public class TutorialThrowingCharacter : MonoBehaviour
+public class TutorialThrowingCharacter : TutorialCharacter
 {
+    [SerializeField] private GameObject snowballIcon;
     [SerializeField] private TutorialSnowball snowballPrefab;
     [SerializeField] private Transform shootingPoint;
     [SerializeField] private float throwFrequency;
     [SerializeField] private int speed;
 
-    private static readonly int ANIMATOR_SHOOTING = Animator.StringToHash("shooting");
-
-    private Animator animator;
+    private static readonly int ANIMATOR_IDLE = Animator.StringToHash("Idle");
+    private static readonly int ANIMATOR_THROW = Animator.StringToHash("Throw");
 
     private float currentTime;
 
-    private void Awake()
+    private bool firstShotFired;
+
+    private List<GameObject> snowballs = new List<GameObject>();
+
+    protected override void Awake()
     {
-        animator = GetComponent<Animator>();
+        base.Awake();
+
+        snowballIcon.SetActive(true);
+    }
+
+    private void OnEnable()
+    {
+        animator.Play(ANIMATOR_IDLE);
+    }
+
+    private void OnDisable()
+    {
+        ResetCharacter();
     }
 
     private void Update()
     {
         currentTime += Time.deltaTime;
 
-        if (currentTime >= throwFrequency)
+        if (!firstShotFired && currentTime > 1f)
         {
             Throw();
 
-            currentTime = 0;
+            firstShotFired = true;
         }
+
+        if (currentTime < throwFrequency)
+            return;
+
+        Throw();
+    }
+
+    private void ResetCharacter()
+    {
+        snowballs.ForEach(s => Destroy(s));
+
+        StopAllCoroutines();
+
+        snowballIcon.SetActive(true);
+
+        currentTime = 0;
+
+        firstShotFired = false;
     }
 
     private void Throw()
     {
-        StartCoroutine(ShootAnimationCo());
-    }
+        currentTime = 0;
 
-    private IEnumerator ShootAnimationCo()
-    {
-        animator.SetBool(ANIMATOR_SHOOTING, true);
+        snowballIcon.SetActive(false);
 
-        yield return new WaitForSeconds(.2f);
+        StartCoroutine(ThrowAnimationCo());
 
         TutorialSnowball snowball = Instantiate(snowballPrefab, shootingPoint.position, Quaternion.identity);
 
         snowball.Shoot(-Vector2.right, speed);
 
-        animator.SetBool(ANIMATOR_SHOOTING, false);
+        snowballs.Add(snowball.gameObject);
+    }
+
+    private IEnumerator ThrowAnimationCo()
+    {
+        animator.Play(ANIMATOR_THROW);
+
+        float delay = animator.GetCurrentAnimatorStateInfo(0).length;
+
+        yield return new WaitForSeconds(delay + .1f);
+
+        animator.Play(ANIMATOR_IDLE);
+
+        yield return new WaitForSeconds(1f);
+        
+        snowballIcon.SetActive(true);
     }
 }

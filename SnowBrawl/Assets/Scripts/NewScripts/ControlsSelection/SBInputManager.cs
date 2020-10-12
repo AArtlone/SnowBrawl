@@ -24,9 +24,15 @@ public class SBInputManager : MonoBehaviour
     private void Awake()
     {
         if (Instance != null && Instance != this)
+        {
             Destroy(gameObject);
+        }
         else
+        {
             Instance = this;
+
+            DontDestroyOnLoad(this);
+        }
 
         InitMyKeys();
     }
@@ -68,6 +74,17 @@ public class SBInputManager : MonoBehaviour
             horizontalInput = Input.GetAxisRaw(stringID);
 
         return horizontalInput;
+    }
+
+    public bool AnyKeyDown()
+    {
+        if (Input.anyKeyDown)
+            return true;
+
+        if (IsAnyCustomKeyIsDown() != KeyCode.None)
+            return true;
+
+        return false;
     }
 
     public KeyCode IsAnyCustomKeyIsDown()

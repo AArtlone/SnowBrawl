@@ -3,19 +3,20 @@
 [RequireComponent(typeof(Rigidbody2D))]
 public class ImprovedJump : MonoBehaviour 
 {
-    private Rigidbody2D rb;
-    private MovementSettings movementSettings;
+    protected Rigidbody2D rb;
 
-    private void Awake()
+    protected float fallMultiplier;
+
+    protected virtual void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
 
-        movementSettings = GameManager.Instance.MVSettings;
+        fallMultiplier = GameManager.Instance.MVSettings.fallMultiplier;
     }
 
-    public void Update()
+    protected virtual void Update()
     {
         if(rb.velocity.y < 0)
-            rb.velocity += Vector2.up * Physics2D.gravity.y * (movementSettings.fallMultiplier - 1) * Time.deltaTime;
+            rb.velocity += Vector2.up * Physics2D.gravity.y * (fallMultiplier - 1) * Time.deltaTime;
     }
 }
