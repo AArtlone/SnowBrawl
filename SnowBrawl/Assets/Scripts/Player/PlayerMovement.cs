@@ -32,23 +32,25 @@ public class PlayerMovement: MonoBehaviour
         rb.simulated = false;
     }
 
+    private void Update()
+    {
+        if (GameManager.GameIsPaused)
+            return;
+
+        UpdateVerticalVelocity();
+    }
+
     private void FixedUpdate()
     {
         if (GameManager.GameIsPaused)
             return;
 
-        UpdateVelocity();
-    }
-
-    private void UpdateVelocity()
-    {
         UpdateHorizontalVelocity();
-        UpdateVerticalVelocity();
     }
 
     private void UpdateHorizontalVelocity()
     {
-        var horizontalInput = SBInputManager.Instance.GetPlayerInput(player.PlayerID);
+        var horizontalInput = SBInputManager.GetPlayerInput(player.PlayerID);
 
         if (horizontalInput == 0)
         {
@@ -79,10 +81,12 @@ public class PlayerMovement: MonoBehaviour
 
     private void UpdateVerticalVelocity()
     {
+        print(groundCheck.IsGrounded);
+
         if (!groundCheck.IsGrounded)
             return;
 
-        if (Input.GetKey(jumpKey))
+        if (SBInputManager.GetKeyDown(jumpKey))
         {
             rb.velocity = Vector2.up * mvSettings.springAbility;
             SoundManager.PlaySound(Sound.Jump);
@@ -106,4 +110,5 @@ public class PlayerMovement: MonoBehaviour
     }
 
     private GameManager GameManager { get { return GameManager.Instance; } }
+    private SBInputManager SBInputManager { get { return SBInputManager.Instance; } }
 }

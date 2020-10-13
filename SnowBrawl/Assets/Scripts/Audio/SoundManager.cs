@@ -18,8 +18,6 @@ public static class SoundManager
 
         audioSource.volume = soundAudioClip.volume;
 
-        Debug.Log(audioSource.volume);
-
         audioSource.Play();
     }
 
