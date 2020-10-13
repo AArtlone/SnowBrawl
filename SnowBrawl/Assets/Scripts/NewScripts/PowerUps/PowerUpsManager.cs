@@ -9,6 +9,8 @@ public class PowerUpsManager : MonoBehaviour
 
     public void PowerUpWasPickedUp(PowerUpData powerUpData)
     {
+        SoundManager.PlaySound(Sound.PowerUp);
+
         StartCoroutine(Player1PowerUpCo(powerUpData));
     }
 

@@ -24,6 +24,9 @@ public class ControlsSelection : MonoBehaviour
     {
         LoadView();
 
+        UnityEditor.EditorUtility.SetDirty(p1KeysSettings);
+        UnityEditor.EditorUtility.SetDirty(p2KeysSettings);
+
         p1Button.onTabSelected += OnPlayer1TabSelected;
         p2Button.onTabSelected += OnPlayer2TabSelected;
     }
@@ -54,7 +57,7 @@ public class ControlsSelection : MonoBehaviour
         if (!e.isKey || !Input.GetKeyDown(e.keyCode))
             return;
 
-        Smth(e.keyCode);
+        SaveNewKeyBinding(e.keyCode);
     }
 
     private void Update()
@@ -67,11 +70,10 @@ public class ControlsSelection : MonoBehaviour
         if (pressedCustomkey == KeyCode.None)
             return;
 
-        Smth(pressedCustomkey);
+        SaveNewKeyBinding(pressedCustomkey);
     }
 
-    // TODO: rename
-    private void Smth(KeyCode keyCode)
+    private void SaveNewKeyBinding(KeyCode keyCode)
     {
         CheckIfIsTaken(keyCode);
 
@@ -99,8 +101,6 @@ public class ControlsSelection : MonoBehaviour
                 keysSettings.dropKey = keyCode;
                 break;
         }
-
-        //UnityEditor.EditorUtility.SetDirty(keysSettings);
 
         controlListener.UpdateBinding(keyCode);
 

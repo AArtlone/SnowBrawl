@@ -74,12 +74,6 @@ public class TutorialThrowingCharacter : TutorialCharacter
         snowballIcon.SetActive(false);
 
         StartCoroutine(ThrowAnimationCo());
-
-        TutorialSnowball snowball = Instantiate(snowballPrefab, shootingPoint.position, Quaternion.identity);
-
-        snowball.Shoot(-Vector2.right, speed);
-
-        snowballs.Add(snowball.gameObject);
     }
 
     private IEnumerator ThrowAnimationCo()
@@ -89,6 +83,14 @@ public class TutorialThrowingCharacter : TutorialCharacter
         float delay = animator.GetCurrentAnimatorStateInfo(0).length;
 
         yield return new WaitForSeconds(delay + .1f);
+
+        TutorialSnowball snowball = Instantiate(snowballPrefab, shootingPoint.position, Quaternion.identity);
+
+        snowball.Shoot(-Vector2.right, speed);
+
+        snowballs.Add(snowball.gameObject);
+
+        SoundManager.PlaySound(Sound.ThrowSnowball);
 
         animator.Play(ANIMATOR_IDLE);
 

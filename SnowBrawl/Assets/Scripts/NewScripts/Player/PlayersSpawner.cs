@@ -8,9 +8,11 @@ public class PlayersSpawner : MonoBehaviour
     [SerializeField] private Player p2Prefab;
 
     [Header("Respawn")]
-    [SerializeField] private float playerRespawnTime;
+    [SerializeField] private int playerRespawnTime;
     [SerializeField] private Transform p1RespawnPos;
     [SerializeField] private Transform p2RespawnPos;
+
+    public int RespawnTime { get { return playerRespawnTime; } }
 
     public void RespawnPlayer(PlayerID playerID)
     {

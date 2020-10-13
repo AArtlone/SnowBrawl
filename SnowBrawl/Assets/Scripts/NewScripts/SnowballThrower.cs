@@ -7,7 +7,7 @@ public class SnowballThrower : MonoBehaviour
     [SerializeField] private Snowball snowballPrefab;
     [SerializeField] private Transform throwingPoint;
 
-    private const float throwingAnimDuration = .25f; //TODO: get animation duration from the anim controller;
+    private const float throwingAnimDuration = .25f;
     private const float speed = 20f;
     private const float snowballDestroyDelay = 5f;
 

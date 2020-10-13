@@ -35,6 +35,8 @@ public class GameManager : MonoBehaviour
 
     public int RoundDuration { get { return roundDuration; } }
 
+    public int RespawnTime { get { return playersSpawner.RespawnTime; } }
+
     private void Awake()
     {
         if (Instance != null && Instance != this)
@@ -84,6 +86,8 @@ public class GameManager : MonoBehaviour
 
     public void KillPlayer(Player player)
     {
+        SoundManager.PlaySound(Sound.SnowballHit);
+        
         if (player.PowerUpsManager.HasPowerUp(PowerUpType.Shield))
             return;
 

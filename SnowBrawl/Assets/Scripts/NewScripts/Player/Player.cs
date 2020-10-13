@@ -8,12 +8,11 @@ public class Player : MonoBehaviour
     public Action<PowerUpData> onPlayerReceivedPowerUp;
 
     [SerializeField] private PlayerID playerID;
-    private KeysSettings keysSettings;
     [SerializeField] private PowerUpsManager powerUpsManager;
     [SerializeField] private Transform playerCanvas;
 
     public PlayerID PlayerID { get { return playerID; } }
-    public KeysSettings KeysSettings { get { return keysSettings; } }
+    public KeysSettings KeysSettings { get; private set; }
     public PowerUpsManager PowerUpsManager { get { return powerUpsManager; } }
     public Transform PlayerCanvas { get { return playerCanvas; } }
     public Inventory Inventory { get; private set; }
@@ -29,9 +28,7 @@ public class Player : MonoBehaviour
     {
         string path = "ScriptableObjects/" + playerID.ToString() + "KeysSettings";
         
-        keysSettings = Resources.Load<KeysSettings>(path);
-
-        print(keysSettings.jumpKey);
+        KeysSettings = Resources.Load<KeysSettings>(path);
     }
 
     private void Start()

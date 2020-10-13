@@ -69,14 +69,14 @@ public class TutorialStealingCharacter : TutorialCharacter
         yield return new WaitForSeconds(.5f);
 
         snowballIcons[0].SetActive(true);
-
         snowballsText.text = 1.ToString();
+        SoundManager.PlaySound(Sound.PickUpSnowball);
 
         yield return new WaitForSeconds(.5f);
 
         snowballIcons[1].SetActive(true);
-
         snowballsText.text = 0.ToString();
+        SoundManager.PlaySound(Sound.PickUpSnowball);
 
         animator.Play(ANIMATOR_IDLE);
 

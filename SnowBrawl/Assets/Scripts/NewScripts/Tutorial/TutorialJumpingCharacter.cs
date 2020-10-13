@@ -39,6 +39,8 @@ public class TutorialJumpingCharacter : TutorialCharacter
 
     private void Jump()
     {
+        SoundManager.PlaySound(Sound.Jump);
+
         ChangeAnimationState(ANIMATOR_JUMP);
 
         rb.velocity = Vector2.up * jumpValue;

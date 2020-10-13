@@ -112,7 +112,9 @@ public class PlayerActions: MonoBehaviour
         if (player.NearEnemyBase)
             player.EnemyBase.Snowballs--;
 
-        PopUpManager.Instance.PickedUpSnowball(player);
+        PopUpManager.PickedUpSnowball(player);
+
+        SoundManager.PlaySound(Sound.PickUpSnowball);
     }
 
     public void Throw()
@@ -132,6 +134,8 @@ public class PlayerActions: MonoBehaviour
         animationController.ThrowAnimation();
 
         player.Inventory.Snowballs--;
+
+        SoundManager.PlaySound(Sound.ThrowSnowball);
     }
 
     public void Drop()
@@ -146,9 +150,9 @@ public class PlayerActions: MonoBehaviour
 
         player.Inventory.Snowballs--;
 
-        //TODO: playsound
+        SoundManager.PlaySound(Sound.DropSnowball);
 
-        PopUpManager.Instance.DroppedSnowballPopUp(homeBase);
+        PopUpManager.DroppedSnowballPopUp(homeBase);
     }
 
     #region HelpFunctions
@@ -198,4 +202,6 @@ public class PlayerActions: MonoBehaviour
             return true;
     } 
     #endregion
+
+    private PopUpManager PopUpManager { get { return PopUpManager.Instance; } }
 }

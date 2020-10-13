@@ -86,23 +86,23 @@ public class TutorialPickingUpCharacter : TutorialCharacter
 
         yield return new WaitForSeconds(.5f);
 
+        SoundManager.PlaySound(Sound.PickUpSnowball);
         snowballIcons[0].SetActive(true);
 
         yield return new WaitForSeconds(.5f);
 
+        SoundManager.PlaySound(Sound.PickUpSnowball);
         snowballIcons[1].SetActive(true);
-
+        
         animator.Play(ANIMATOR_WALK);
-
         walk = true;
     }
 
     private IEnumerator DropSnowballs()
     {
-        // TODO: play sound
-
         animator.Play(ANIMATOR_IDLE);
 
+        SoundManager.PlaySound(Sound.DropSnowball);
         snowballIcons[1].SetActive(false);
         droppedSnowballsIcons[0].gameObject.SetActive(true);
 
@@ -110,8 +110,8 @@ public class TutorialPickingUpCharacter : TutorialCharacter
 
         yield return new WaitForSeconds(.5f);
 
+        SoundManager.PlaySound(Sound.DropSnowball);
         snowballIcons[0].SetActive(false);
-
         droppedSnowballsIcons[1].gameObject.SetActive(true);
 
         snowballsText.text = 2.ToString();

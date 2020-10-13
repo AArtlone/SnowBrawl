@@ -4,7 +4,7 @@ public class PlayerMovement: MonoBehaviour
 {
     [SerializeField] private Player player;
     [SerializeField] private GroundCheck groundCheck;
-    [SerializeField] private Rigidbody2D rbToMove;
+    [SerializeField] private Rigidbody2D rb;
     [SerializeField] private Collider2D col;
 
     private MovementSettings mvSettings;
@@ -29,7 +29,7 @@ public class PlayerMovement: MonoBehaviour
 
     private void OnRoundOver()
     {
-        rbToMove.simulated = false;
+        rb.simulated = false;
     }
 
     private void FixedUpdate()
@@ -52,7 +52,7 @@ public class PlayerMovement: MonoBehaviour
 
         if (horizontalInput == 0)
         {
-            rbToMove.velocity = new Vector2(0, rbToMove.velocity.y);
+            rb.velocity = new Vector2(0, rb.velocity.y);
             return;
         }
 
@@ -63,18 +63,18 @@ public class PlayerMovement: MonoBehaviour
         if (player.PowerUpsManager.HasPowerUp(PowerUpType.Boots))
             speed = mvSettings.poweredUpSpeed;
 
-        rbToMove.AddForce(Vector2.right * speed * horizontalInput);
+        rb.AddForce(Vector2.right * speed * horizontalInput);
 
         ClampVelocity();
     }
 
     private void ClampVelocity()
     {
-        var horizontalVelocity = rbToMove.velocity.x;
+        var horizontalVelocity = rb.velocity.x;
 
         horizontalVelocity = Mathf.Clamp(horizontalVelocity, mvSettings.minSpeed, mvSettings.maxSpeed);
 
-        rbToMove.velocity = new Vector2(horizontalVelocity, rbToMove.velocity.y);
+        rb.velocity = new Vector2(horizontalVelocity, rb.velocity.y);
     }
 
     private void UpdateVerticalVelocity()
@@ -83,7 +83,10 @@ public class PlayerMovement: MonoBehaviour
             return;
 
         if (Input.GetKey(jumpKey))
-            rbToMove.velocity = Vector2.up * mvSettings.springAbility;
+        {
+            rb.velocity = Vector2.up * mvSettings.springAbility;
+            SoundManager.PlaySound(Sound.Jump);
+        }
     }
 
     private void FlipCharacter(float horizontalInput)

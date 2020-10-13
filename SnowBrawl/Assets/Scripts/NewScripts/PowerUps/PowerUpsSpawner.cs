@@ -8,6 +8,7 @@ public class PowerUpsSpawner : MonoBehaviour
 
     [SerializeField] private List<GameObject> powerUpsPrefabs;
 
+    [Space(10f)]
     [SerializeField] private int spawnDelay;
     [SerializeField] private int powerUpExistanceDuration;
 
