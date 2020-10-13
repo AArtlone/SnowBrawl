@@ -81,8 +81,6 @@ public class PlayerMovement: MonoBehaviour
 
     private void UpdateVerticalVelocity()
     {
-        print(groundCheck.IsGrounded);
-
         if (!groundCheck.IsGrounded)
             return;
 

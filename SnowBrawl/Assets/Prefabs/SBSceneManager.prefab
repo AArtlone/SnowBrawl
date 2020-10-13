@@ -43,6 +43,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 58abf9350501c8442a003d260da95e6f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  mainMenuSceneName: MainMenu
   loadingSceneName: LoadingScene
   controlsSceneName: ControlsSelection
   tutorialSceneName: Tutorial

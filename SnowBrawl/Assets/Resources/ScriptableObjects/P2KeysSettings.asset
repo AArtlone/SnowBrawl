@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 429bd8b3ec975794684d1f320aab1048, type: 3}
   m_Name: P2KeysSettings
   m_EditorClassIdentifier: 
-  jumpKey: 119
-  throwKey: 114
-  pickUpKey: 101
+  jumpKey: 273
+  throwKey: 108
+  pickUpKey: 112
   dropKey: 372

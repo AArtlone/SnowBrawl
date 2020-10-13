@@ -20,6 +20,12 @@ public abstract class EffectBase : MonoBehaviour
 
     protected virtual void Awake()
     {
+        if (tween.NeedsDelay)
+        {
+            waitingForStartDelay = true;
+            delayTimeLeft = tween.delay;
+        }
+
         if (!autoReset)
             return;
 
@@ -102,12 +108,6 @@ public abstract class EffectBase : MonoBehaviour
     protected virtual void Reset()
     {
         playTime = 0f;
-
-        if (tween.NeedsDelay)
-        {
-            waitingForStartDelay = true;
-            delayTimeLeft = tween.delay;
-        }
     }
 
     public virtual void PlayEffect()

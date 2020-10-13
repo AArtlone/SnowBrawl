@@ -7,9 +7,9 @@ public class AlphaEffect : Effect<float>
 
     protected override void Awake()
     {
-        base.Awake();
-
         canvasGroup = GetComponent<CanvasGroup>();
+        
+        base.Awake();
     }
 
     protected override void ApplyEffect()

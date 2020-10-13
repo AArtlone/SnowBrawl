@@ -46,7 +46,15 @@ public class PowerUpsSpawner : MonoBehaviour
         if (GameManager.GameIsPaused)
             yield break;
 
-        GameObject powerUp = Instantiate(GetRandomPrefab(), GetRandomPosition(), Quaternion.identity);
+        Transform platformToSpawnOn = GetRandomPlatform();
+
+        Vector2 posToSpawnOn = new Vector2(
+            platformToSpawnOn.position.x, 
+            platformToSpawnOn.position.y + 2f);
+
+        GameObject powerUp = Instantiate(GetRandomPrefab(), posToSpawnOn, Quaternion.identity);
+
+        powerUp.transform.parent = platformToSpawnOn;
 
         yield return new WaitForSeconds(powerUpExistanceDuration);
         
@@ -68,15 +76,11 @@ public class PowerUpsSpawner : MonoBehaviour
         return powerUpsPrefabs[rnd];
     }
 
-    private Vector2 GetRandomPosition()
+    private Transform GetRandomPlatform()
     {
         int rnd = Random.Range(0, platformToSpawnPUOn.Count);
 
-        var spawnPos = platformToSpawnPUOn[rnd].position;
-
-        spawnPos.y += 2f;
-
-        return spawnPos;
+        return platformToSpawnPUOn[rnd];
     }
 
     private GameManager GameManager { get { return GameManager.Instance; } }

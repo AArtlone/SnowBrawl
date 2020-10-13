@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 
@@ -25,9 +26,8 @@ public class GameManager : MonoBehaviour
     [SerializeField] private PlayerBase p2Base;
 
     [Header("UI References")]
-    [SerializeField] private GameObject roundOverObject;
+    [SerializeField] private List<GameObject> objectToEnableOnRoundOver;
     [SerializeField] private TextMeshProUGUI playerXWon;
-    [SerializeField] private GameObject nextRoundButton;
 
     public MovementSettings MVSettings { get { return mvSettings; } }
 
@@ -75,13 +75,9 @@ public class GameManager : MonoBehaviour
 
     private void ShowRoundOverUI()
     {
-        roundOverObject.SetActive(true);
-
-        playerXWon.gameObject.SetActive(true);
+        objectToEnableOnRoundOver.ForEach(obj => obj.SetActive(true));
 
         playerXWon.text = GetPlayerWonText();
-
-        nextRoundButton.SetActive(true);
     }
 
     public void KillPlayer(Player player)
@@ -113,7 +109,20 @@ public class GameManager : MonoBehaviour
 
     public void LoadNextLevel()
     {
-        SBSceneManager.Instance.LoadNextRound();
+        if (SBSceneManager.Instance == null)
+            return;
+
+        SBSceneManager.LoadNextRound();
+    }
+
+    public void PlayAgain()
+    {
+        SBSceneManager.LoadFirstRound();
+    }
+
+    public void GoToMainMenu()
+    {
+        SBSceneManager.LoadMainMenu();
     }
 
     public string GetPlayerWonText()
@@ -128,4 +137,6 @@ public class GameManager : MonoBehaviour
         else
             return "Draw";
     }
+
+    private SBSceneManager SBSceneManager { get { return SBSceneManager.Instance; } }
 }

@@ -19,6 +19,8 @@ public static class SoundManager
         audioSource.volume = soundAudioClip.volume;
 
         audioSource.Play();
+
+        Object.Destroy(soundGameObject, 5f);
     }
 
     public static void AddButtonSounds(this MyButton myButton)
