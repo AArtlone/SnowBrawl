@@ -8,7 +8,7 @@ public class Player : MonoBehaviour
     public Action<PowerUpData> onPlayerReceivedPowerUp;
 
     [SerializeField] private PlayerID playerID;
-    [SerializeField] private KeysSettings keysSettings;
+    private KeysSettings keysSettings;
     [SerializeField] private PowerUpsManager powerUpsManager;
     [SerializeField] private Transform playerCanvas;
 
@@ -24,6 +24,15 @@ public class Player : MonoBehaviour
     public bool NearHome { get; private set; }
     public bool NearEnemyBase { get; private set; }
     public bool FacingRight { get; set; }
+
+    private void Awake()
+    {
+        string path = "ScriptableObjects/" + playerID.ToString() + "KeysSettings";
+        
+        keysSettings = Resources.Load<KeysSettings>(path);
+
+        print(keysSettings.jumpKey);
+    }
 
     private void Start()
     {

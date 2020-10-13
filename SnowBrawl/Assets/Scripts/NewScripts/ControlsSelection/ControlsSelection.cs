@@ -70,6 +70,7 @@ public class ControlsSelection : MonoBehaviour
         Smth(pressedCustomkey);
     }
 
+    // TODO: rename
     private void Smth(KeyCode keyCode)
     {
         CheckIfIsTaken(keyCode);
@@ -98,6 +99,8 @@ public class ControlsSelection : MonoBehaviour
                 keysSettings.dropKey = keyCode;
                 break;
         }
+
+        //UnityEditor.EditorUtility.SetDirty(keysSettings);
 
         controlListener.UpdateBinding(keyCode);
 

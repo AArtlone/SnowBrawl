@@ -46,10 +46,7 @@ public class SBSceneManager : MonoBehaviour
         AsyncOperation loadingSceneAsync = SceneManager.LoadSceneAsync(loadingSceneName, LoadSceneMode.Additive);
 
         while(!loadingSceneAsync.isDone)
-        {
-            print("LoadingScene is not loaded yet");
             yield return null;
-        }
 
         AsyncOperation asyncOperation = SceneManager.LoadSceneAsync(sceneToLoad);
 

@@ -28,6 +28,12 @@ public class AlphaEffect : Effect<float>
     {
         base.Reset();
 
+        if (canvasGroup == null)
+        {
+            Debug.LogWarning("CanvasGroup is null, returning");
+            return;
+        }
+
         canvasGroup.alpha = startValue;
     }
 }

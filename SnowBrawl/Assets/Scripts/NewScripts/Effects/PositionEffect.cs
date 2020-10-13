@@ -18,8 +18,6 @@ public class PositionEffect : Effect<Vector3>
     {
         base.Reset();
 
-        print("reseting");
-
         transform.localPosition = startValue;
     }
 

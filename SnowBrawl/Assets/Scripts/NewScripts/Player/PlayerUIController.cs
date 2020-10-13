@@ -7,6 +7,9 @@ public class PlayerUIController : MonoBehaviour
 {
     [SerializeField] private PlayerID playerID;
     [SerializeField] private List<GameObject> snowballIcons = new List<GameObject>(3);
+    [SerializeField] private GameObject snowballSlotsParent;
+
+    [SerializeField] private TextMeshProUGUI deathTimer;
     [SerializeField] private TextMeshProUGUI homeSnowballs;
 
     [SerializeField] private PlayerBase playerBase;
@@ -35,6 +38,10 @@ public class PlayerUIController : MonoBehaviour
         player.numOfSnowballChanged += OnNumOfSnowballesChanged;
 
         characterImage.sprite = aliveIcon;
+
+        snowballSlotsParent.SetActive(true);
+
+        deathTimer.gameObject.SetActive(false);
     }
 
     private void OnPlayerKilled(Player player)
@@ -43,6 +50,10 @@ public class PlayerUIController : MonoBehaviour
             return;
 
         characterImage.sprite = deadIcon;
+
+        snowballSlotsParent.SetActive(false);
+
+        deathTimer.gameObject.SetActive(true);
     }
 
     private void OnNumOfSnowballesChanged(int value)

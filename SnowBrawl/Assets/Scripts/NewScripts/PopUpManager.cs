@@ -81,7 +81,7 @@ public class PopUpManager : MonoBehaviour
 
         yield return new WaitForSeconds(effect.tween.targetTime);
 
-        //Destroy(effect.gameObject);
+        Destroy(effect.gameObject);
 
         playerCanvasIconsCounter--;
     }

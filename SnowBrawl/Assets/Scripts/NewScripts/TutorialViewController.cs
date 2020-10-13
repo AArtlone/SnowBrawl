@@ -5,6 +5,7 @@ public class TutorialViewController : MonoBehaviour
 {
     [SerializeField] private List<GameObject> tutorialPages;
 
+    [Space(10f)]
     [SerializeField] private GameObject confirmationPopUp;
 
     [SerializeField] private GameObject previousPageButton;
@@ -61,6 +62,9 @@ public class TutorialViewController : MonoBehaviour
 
     public void LoadGame()
     {
+        if (SBSceneManager.Instance == null)
+            return;
+
         SBSceneManager.Instance.LoadFirstRound();
     }
 }

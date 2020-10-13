@@ -13,8 +13,6 @@ public class PlayerMovement: MonoBehaviour
     private void Awake()
     {
         GameManager.onRoundOver += OnRoundOver;
-
-        jumpKey = player.KeysSettings.jumpKey;
     }
 
     private void OnDestroy()
@@ -25,7 +23,10 @@ public class PlayerMovement: MonoBehaviour
     private void Start()
     {
         mvSettings = GameManager.MVSettings;
+
+        jumpKey = player.KeysSettings.jumpKey;
     }
+
     private void OnRoundOver()
     {
         rbToMove.simulated = false;

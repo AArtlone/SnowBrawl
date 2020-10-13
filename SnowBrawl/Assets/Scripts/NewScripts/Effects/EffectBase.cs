@@ -26,6 +26,11 @@ public abstract class EffectBase : MonoBehaviour
         Reset();
     }
 
+    private void OnDisable()
+    {
+        Reset();
+    }
+
     private void Start()
     {
         if (playOnStart)

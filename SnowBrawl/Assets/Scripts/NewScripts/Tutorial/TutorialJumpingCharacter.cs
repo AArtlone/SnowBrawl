@@ -10,8 +10,6 @@ public class TutorialJumpingCharacter : TutorialCharacter
 
     private Rigidbody2D rb;
 
-    private Vector2 spawnPos;
-
     private int currentAnimationState;
 
     protected override void Awake()
@@ -19,8 +17,6 @@ public class TutorialJumpingCharacter : TutorialCharacter
         base.Awake();
         
         rb = GetComponent<Rigidbody2D>();
-
-        spawnPos = transform.position;
     }
 
     private void OnTriggerEnter2D(Collider2D col)
