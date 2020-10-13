@@ -1,7 +1,7 @@
 ﻿using TMPro;
 using UnityEngine;
 
-public class ControlListener : MonoBehaviour
+public class ControlListener : MyButton
 {
     [SerializeField] private GameAction gameAction;
     [SerializeField] private TextMeshProUGUI keyCodeText;
@@ -28,6 +28,8 @@ public class ControlListener : MonoBehaviour
 
     private void UpdateText()
     {
-        keyCodeText.text = KeyBinding.ToString();
+        string bindingText = SBInputManager.Instance.ConvertBindingToText(KeyBinding);
+
+        keyCodeText.text = bindingText;
     }
 }

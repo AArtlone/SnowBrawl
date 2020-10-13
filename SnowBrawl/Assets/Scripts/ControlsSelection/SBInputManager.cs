@@ -100,7 +100,7 @@ public class SBInputManager : MonoBehaviour
 
     public bool GetKeyDown(KeyCode keyCode)
     {
-        if (!IsMyKey(keyCode))
+        if (!IsCustomKey(keyCode))
             return Input.GetKeyDown(keyCode);
 
         foreach (var myKey in myKeys)
@@ -114,7 +114,7 @@ public class SBInputManager : MonoBehaviour
 
     public bool GetKey(KeyCode keyCode)
     {
-        if (!IsMyKey(keyCode))
+        if (!IsCustomKey(keyCode))
             return Input.GetKey(keyCode);
 
         foreach (var myKey in myKeys)
@@ -128,7 +128,7 @@ public class SBInputManager : MonoBehaviour
 
     public bool GetKeyUp(KeyCode keyCode)
     {
-        if (!IsMyKey(keyCode))
+        if (!IsCustomKey(keyCode))
             return Input.GetKeyUp(keyCode);
 
         foreach (var myKey in myKeys)
@@ -140,7 +140,7 @@ public class SBInputManager : MonoBehaviour
         return false;
     }
 
-    private bool IsMyKey(KeyCode keyCode)
+    private bool IsCustomKey(KeyCode keyCode)
     {
         foreach (var v in myKeys)
         {
@@ -149,5 +149,13 @@ public class SBInputManager : MonoBehaviour
         }
 
         return false;
+    }
+
+    public string ConvertBindingToText(KeyCode keyCode)
+    {
+        if (!IsCustomKey(keyCode))
+            return keyCode.ToString();
+
+        return KeyCodeToString.Convert(keyCode);
     }
 }

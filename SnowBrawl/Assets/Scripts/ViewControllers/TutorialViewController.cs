@@ -14,6 +14,8 @@ public class TutorialViewController : MonoBehaviour
 
     private int tutorialPageIndex;
 
+    private bool isInLoadingSequence;
+
     private void Awake()
     {
         ShowFirstView();
@@ -62,8 +64,13 @@ public class TutorialViewController : MonoBehaviour
 
     public void LoadGame()
     {
+        if (isInLoadingSequence)
+            return;
+
         if (SBSceneManager.Instance == null)
             return;
+
+        isInLoadingSequence = true;
 
         SBSceneManager.Instance.LoadFirstRound();
     }

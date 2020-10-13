@@ -41,26 +41,16 @@ public class SBSceneManager : MonoBehaviour
     {
         yield return null;
 
-        string activeScene = SceneManager.GetActiveScene().name;
-
         AsyncOperation loadingSceneAsync = SceneManager.LoadSceneAsync(loadingSceneName, LoadSceneMode.Additive);
-
-        while(!loadingSceneAsync.isDone)
-            yield return null;
 
         AsyncOperation asyncOperation = SceneManager.LoadSceneAsync(sceneToLoad);
 
         asyncOperation.allowSceneActivation = false;
 
-        while (!asyncOperation.isDone)
-        {
-            LoadingOperationProgress = (int)(asyncOperation.progress * 100f);
-            
-            if (asyncOperation.progress >= .9f)
-                asyncOperation.allowSceneActivation = true;
+        LoadingOperationProgress = (int)(asyncOperation.progress * 100f);
 
-            yield return null;
-        }
+        if (asyncOperation.progress >= .9f)
+            asyncOperation.allowSceneActivation = true;
     }
 
     public void LoadFirstRound()

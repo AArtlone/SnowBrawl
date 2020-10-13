@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class ControlsSelection : MonoBehaviour
 {
@@ -14,7 +15,10 @@ public class ControlsSelection : MonoBehaviour
     [SerializeField] private TabButton p1Button;
     [SerializeField] private TabButton p2Button;
 
+    [Space(5), SerializeField] private GameObject dimmedBackground;
+
     private ControlListener controlListener;
+    private Canvas controlListenerCanvas;
 
     private PlayerID selectedPlayer = PlayerID.P1;
 
@@ -78,6 +82,10 @@ public class ControlsSelection : MonoBehaviour
         CheckIfIsTaken(keyCode);
 
         listeningToControlSelection = false;
+
+        dimmedBackground.SetActive(false);
+
+        Destroy(controlListenerCanvas);
 
         KeysSettings keysSettings;
 
@@ -145,6 +153,14 @@ public class ControlsSelection : MonoBehaviour
             return;
 
         listeningToControlSelection = true;
+
+        dimmedBackground.SetActive(true);
+
+        controlListenerCanvas = controlListener.gameObject.AddComponent<Canvas>();
+
+        controlListenerCanvas.overrideSorting = true;
+
+        controlListenerCanvas.sortingOrder = 10;
     }
 
     public void LoadTutorial()

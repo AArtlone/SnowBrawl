@@ -1,5 +1,6 @@
 ﻿using System;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
@@ -18,6 +19,9 @@ public class MyButton : MonoBehaviour, IPointerEnterHandler, IPointerClickHandle
     [SerializeField] private Color idleColor;
     [SerializeField] private Color hoverColor;
     [SerializeField] private Color activeColor;
+
+    [Space(5f)]
+    [SerializeField] private UnityEvent onClickEvent;
 
     private void Awake()
     {
@@ -49,6 +53,9 @@ public class MyButton : MonoBehaviour, IPointerEnterHandler, IPointerClickHandle
             UpdateVisual(activeColor);
         else
             UpdateVisual(activeSprite);
+
+        if (onClickEvent != null)
+            onClickEvent.Invoke();
 
         if (onClick != null)
             onClick.Invoke();

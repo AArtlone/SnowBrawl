@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 429bd8b3ec975794684d1f320aab1048, type: 3}
   m_Name: P1KeysSettings
   m_EditorClassIdentifier: 
-  jumpKey: 350
-  throwKey: 351
-  pickUpKey: 353
-  dropKey: 352
+  jumpKey: 97
+  throwKey: 122
+  pickUpKey: 115
+  dropKey: 120
