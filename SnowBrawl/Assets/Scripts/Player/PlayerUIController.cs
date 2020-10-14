@@ -26,7 +26,7 @@ public class PlayerUIController : MonoBehaviour
     private float currentDeathTime;
     private float respawnTime;
     
-    private bool startTimer;
+    private bool startDeathTimer;
 
     private void Awake()
     {
@@ -72,7 +72,10 @@ public class PlayerUIController : MonoBehaviour
 
     private void Update()
     {
-        if (!startTimer)
+        if (GameManager.GameIsPaused)
+            return;
+
+        if (!startDeathTimer)
             return;
 
         deathTimer.text = currentDeathTime.ToString("0");
@@ -80,14 +83,14 @@ public class PlayerUIController : MonoBehaviour
         currentDeathTime -= Time.deltaTime;
 
         if (currentDeathTime <= 0)
-            startTimer = false;
+            startDeathTimer = false;
     }
 
     private void StartTimer()
     {
         currentDeathTime = respawnTime;
 
-        startTimer = true;
+        startDeathTimer = true;
     }
 
     private void OnNumOfSnowballesChanged(int value)

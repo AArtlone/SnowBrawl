@@ -44,8 +44,6 @@ public class PlayerActions: MonoBehaviour
     {
         if (player.NearPickableBase)
             TryToPickUp();
-        else if (player.NearEnemyBase)
-            TryToSteal();
     }
 
     private void TryToPickUp()
@@ -59,20 +57,6 @@ public class PlayerActions: MonoBehaviour
         PickUp();
 
         if (!CheckIfCanPickUp())
-            animationController.StopPickUpAnimation();
-    }
-
-    private void TryToSteal()
-    {
-        if (!CheckIfCanSteal())
-            return;
-
-        if (!CheckIfPickUpWasSuccessful())
-            return;
-
-        PickUp();
-
-        if (!CheckIfCanSteal())
             animationController.StopPickUpAnimation();
     }
 
@@ -109,8 +93,8 @@ public class PlayerActions: MonoBehaviour
         
         player.Inventory.Snowballs++;
 
-        if (player.NearEnemyBase)
-            player.EnemyBase.Snowballs--;
+        if (player.NearbyPlayerBase != null)
+            player.NearbyPlayerBase.Snowballs--;
 
         PopUpManager.PickedUpSnowball(player);
 
@@ -143,7 +127,7 @@ public class PlayerActions: MonoBehaviour
         if (!CheckIfCanDrop())
             return;
 
-        PlayerBase homeBase = player.HomeBase;
+        PlayerBase homeBase = player.NearbyPlayerBase;
 
         if (homeBase != null)
             homeBase.Snowballs++;
@@ -164,19 +148,10 @@ public class PlayerActions: MonoBehaviour
         if (!player.NearPickableBase)
             return false;
 
-        return true;
-    }
-
-    private bool CheckIfCanSteal()
-    {
-        if (player.Inventory.IsInventoryFull())
-            return false;
-
-        if (!player.NearEnemyBase)
-            return false;
-
-        if (player.EnemyBase.Snowballs == 0)
-            return false;
+        if (player.NearbyPlayerBase != null)
+        {
+            return player.NearbyPlayerBase.Snowballs != 0;
+        }
 
         return true;
     }
@@ -193,7 +168,7 @@ public class PlayerActions: MonoBehaviour
 
     private bool CheckIfCanDrop()
     {
-        if (!player.NearHome)
+        if (!player.IsNearHome())
             return false;
 
         if (player.Inventory.IsInventoryEmpty())

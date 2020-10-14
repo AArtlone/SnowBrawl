@@ -16,12 +16,9 @@ public class Player : MonoBehaviour
     public PowerUpsManager PowerUpsManager { get { return powerUpsManager; } }
     public Transform PlayerCanvas { get { return playerCanvas; } }
     public Inventory Inventory { get; private set; }
-    public PlayerBase HomeBase { get; private set; }
-    public PlayerBase EnemyBase { get; private set; }
+    public PlayerBase NearbyPlayerBase { get; private set; }
 
     public bool NearPickableBase { get; private set; }
-    public bool NearHome { get; private set; }
-    public bool NearEnemyBase { get; private set; }
     public bool FacingRight { get; set; }
 
     private void Awake()
@@ -44,42 +41,23 @@ public class Player : MonoBehaviour
         powerUpsManager.PowerUpWasPickedUp(powerUpData);
     }
 
-    public void EnteredHome(PlayerBase playerBase)
-    {
-        NearHome = true;
-
-        HomeBase = playerBase;
-    }
-
-    public void ExitedHome()
-    {
-        NearHome = false;
-
-        HomeBase = null;
-    }
-
-    public void EnteredEnemyBase(PlayerBase enemyBase)
-    {
-        NearEnemyBase = true;
-
-        EnemyBase = enemyBase;
-    }
-
-    public void ExitedEnemyBase()
-    {
-        NearEnemyBase = false;
-
-        EnemyBase = null;
-    }
-
     public void EnteredPickableBase()
     {
+        NearPickableBase = true;
+    }
+
+    public void EnteredPickableBase(PlayerBase playerBase)
+    {
+        NearbyPlayerBase = playerBase;
         NearPickableBase = true;
     }
 
     public void ExitedPickableBase()
     {
         NearPickableBase = false;
+
+        if (NearbyPlayerBase != null)
+            NearbyPlayerBase = null;
     }
 
     public void Kill()
@@ -93,5 +71,13 @@ public class Player : MonoBehaviour
     {
         if (numOfSnowballChanged != null)
             numOfSnowballChanged.Invoke(Inventory.Snowballs);
+    }
+
+    public bool IsNearHome()
+    {
+        if (NearbyPlayerBase == null)
+            return false;
+
+        return playerID == NearbyPlayerBase.PlayerID;
     }
 }

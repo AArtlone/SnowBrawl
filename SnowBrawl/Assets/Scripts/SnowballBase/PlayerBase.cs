@@ -32,22 +32,27 @@ public class PlayerBase : PickableBase
         if (player == null)
             return;
 
-        if (player.PlayerID == playerID)
-            player.EnteredHome(this);
-        else
-            player.EnteredEnemyBase(this);
+        player.EnteredPickableBase(this);
+
+        //if (player.PlayerID == playerID)
+        //    player.EnteredHome(this);
+        //else
+        //    player.EnteredPickableBase();
     }
 
-    protected override void OnTriggerExit2D(Collider2D col)
-    {
-        Player player = col.GetComponent<Player>();
+    //protected override void OnTriggerExit2D(Collider2D col)
+    //{
+    //    base
+    //    Player player = col.GetComponent<Player>();
 
-        if (player == null)
-            return;
+    //    if (player == null)
+    //        return;
 
-        if (player.PlayerID == playerID)
-            player.ExitedHome();
-        else
-            player.ExitedEnemyBase();
-    }
+    //    player.ExitedPickableBase();
+
+    //    //if (player.PlayerID == playerID)
+    //    //    player.ExitedHome();
+    //    //else
+    //    //    player.ExitedPickableBase();
+    //}
 }

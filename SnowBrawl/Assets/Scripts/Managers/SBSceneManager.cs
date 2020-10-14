@@ -107,4 +107,9 @@ public class SBSceneManager : MonoBehaviour
             yield return null;
         }
     }
+
+    public bool IsLastRound()
+    {
+        return roundIndex == roundsSceneNames.Length - 1;
+    }
 }

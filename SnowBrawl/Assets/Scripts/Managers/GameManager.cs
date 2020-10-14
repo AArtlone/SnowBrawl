@@ -14,28 +14,32 @@ public class GameManager : MonoBehaviour
     public Action<Player> playerSpawned;
     public Action<Player> playerKilled;
 
+    [Header("Settings")]
     [SerializeField] private MovementSettings mvSettings;
 
+    [Header("Script References")]
     [SerializeField] private PlayersSpawner playersSpawner;
-
-    [SerializeField] private RoundTimer roundTimer;
-
-    [SerializeField] private int roundDuration;
-
     [SerializeField] private PlayerBase p1Base;
     [SerializeField] private PlayerBase p2Base;
+    [SerializeField] private RoundTimer roundTimer;
+
+    [Header("Timer")]
+    [SerializeField] private int roundDuration;
 
     [Header("UI References")]
     [SerializeField] private List<GameObject> objectToEnableOnRoundOver;
-    [SerializeField] private TextMeshProUGUI playerXWon;
+    [Space(5f), SerializeField] private TextMeshProUGUI playerXWon;
+    [SerializeField] private TextMeshProUGUI score;
 
     public MovementSettings MVSettings { get { return mvSettings; } }
 
     public bool GameIsPaused { get; private set; }
 
     public int RoundDuration { get { return roundDuration; } }
-
     public int RespawnTime { get { return playersSpawner.RespawnTime; } }
+
+    private int p1Wins;
+    private int p2Wins;
 
     private void Awake()
     {
@@ -65,12 +69,19 @@ public class GameManager : MonoBehaviour
 
     public void RoundOver()
     {
+        SoundManager.PlaySound(Sound.Round_Over);
+
         if (onRoundOver != null)
             onRoundOver.Invoke();
      
         GameIsPaused = true;
 
-        ShowRoundOverUI();
+        SaveWins();
+        
+        if (SBSceneManager.IsLastRound())
+            ShowGameOverUI();
+        else
+            ShowRoundOverUI();
     }
 
     private void ShowRoundOverUI()
@@ -78,6 +89,18 @@ public class GameManager : MonoBehaviour
         objectToEnableOnRoundOver.ForEach(obj => obj.SetActive(true));
 
         playerXWon.text = GetPlayerWonText();
+    }
+
+    private void ShowGameOverUI()
+    {
+        objectToEnableOnRoundOver.ForEach(obj => obj.SetActive(true));
+
+        playerXWon.text = GetResultsText();
+
+        if (score == null)
+            return;
+
+        score.text = p1Wins + " - " + p2Wins;
     }
 
     public void KillPlayer(Player player)
@@ -125,6 +148,17 @@ public class GameManager : MonoBehaviour
         SBSceneManager.LoadMainMenu();
     }
 
+    public void SaveWins()
+    {
+        int p1BaseSnowball = p1Base.Snowballs;
+        int p2BaseSnowball = p2Base.Snowballs;
+
+        if (p1BaseSnowball > p2BaseSnowball)
+            p1Wins++;
+        else if (p1BaseSnowball < p2BaseSnowball)
+            p2Wins++;
+    } 
+
     public string GetPlayerWonText()
     {
         int p1BaseSnowball = p1Base.Snowballs;
@@ -133,6 +167,16 @@ public class GameManager : MonoBehaviour
         if (p1BaseSnowball > p2BaseSnowball)
             return "Player 1 Won";
         else if (p1BaseSnowball < p2BaseSnowball)
+            return "Player 2 Won";
+        else
+            return "Draw";
+    }
+
+    public string GetResultsText()
+    {
+        if (p1Wins > p2Wins)
+            return "Player 1 Won";
+        else if (p1Wins < p2Wins)
             return "Player 2 Won";
         else
             return "Draw";
