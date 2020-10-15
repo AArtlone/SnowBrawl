@@ -9,6 +9,6 @@ public class DeathCollider : MonoBehaviour
         if (player == null)
             return;
 
-        GameManager.Instance.KillPlayer(player);
+        GameManager.Instance.KillPlayer(player, false);
     }
 }

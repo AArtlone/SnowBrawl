@@ -103,11 +103,11 @@ public class GameManager : MonoBehaviour
         score.text = p1Wins + " - " + p2Wins;
     }
 
-    public void KillPlayer(Player player)
+    public void KillPlayer(Player player, bool accountForShield)
     {
         SoundManager.PlaySound(Sound.SnowballHit);
         
-        if (player.PowerUpsManager.HasPowerUp(PowerUpType.Shield))
+        if (accountForShield && player.PowerUpsManager.HasPowerUp(PowerUpType.Shield))
             return;
 
         player.Kill();

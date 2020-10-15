@@ -49,7 +49,7 @@ public class Snowball : MonoBehaviour
         if (player.PlayerID == shooterID)
             return;
 
-        GameManager.KillPlayer(player);
+        GameManager.KillPlayer(player, true);
 
         Destroy(gameObject);
     }
