@@ -28,9 +28,10 @@ public class ControlsSelection : MonoBehaviour
     {
         LoadView();
 
+#if UNITY_EDITOR
         UnityEditor.EditorUtility.SetDirty(p1KeysSettings);
         UnityEditor.EditorUtility.SetDirty(p2KeysSettings);
-
+#endif
         p1Button.onTabSelected += OnPlayer1TabSelected;
         p2Button.onTabSelected += OnPlayer2TabSelected;
     }

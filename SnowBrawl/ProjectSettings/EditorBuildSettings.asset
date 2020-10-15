@@ -26,7 +26,4 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Round3.unity
     guid: 1c86a90afb9614e4bb83f93e6d847095
-  - enabled: 1
-    path: Assets/Scenes/GameOver.unity
-    guid: 2cdf1ae28a1dce9438d4ab6e9dd88f0e
   m_configObjects: {}
