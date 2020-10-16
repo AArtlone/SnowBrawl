@@ -25,6 +25,12 @@ public class Player : MonoBehaviour
     {
         var fileName = playerID.ToString() + "KeysSettings.json";
 
+        if (!IOHandler.FileExists(fileName))
+        {
+            Debug.LogError("The " + fileName + " file does not exist");
+            return;
+        }
+
         var jsonData = IOHandler.LoadFile<KeysSettings>(fileName);
         
         KeysSettings = jsonData;
