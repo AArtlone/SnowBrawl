@@ -23,9 +23,11 @@ public class Player : MonoBehaviour
 
     private void Awake()
     {
-        string path = "ScriptableObjects/" + playerID.ToString() + "KeysSettings";
+        var fileName = playerID.ToString() + "KeysSettings.json";
+
+        var jsonData = IOHandler.LoadFile<KeysSettings>(fileName);
         
-        KeysSettings = Resources.Load<KeysSettings>(path);
+        KeysSettings = jsonData;
     }
 
     private void Start()

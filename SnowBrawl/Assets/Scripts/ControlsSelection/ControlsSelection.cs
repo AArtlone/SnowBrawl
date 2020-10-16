@@ -1,11 +1,10 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
 
 public class ControlsSelection : MonoBehaviour
 {
-    [SerializeField] private KeysSettings p1KeysSettings;
-    [SerializeField] private KeysSettings p2KeysSettings;
+    private KeysSettings p1KeysSettings;
+    private KeysSettings p2KeysSettings;
 
     [SerializeField] private List<ControlListener> allListeners;
 
@@ -26,12 +25,10 @@ public class ControlsSelection : MonoBehaviour
 
     private void Awake()
     {
-        LoadView();
+        InitializePlayerKeysSettings();
 
-#if UNITY_EDITOR
-        UnityEditor.EditorUtility.SetDirty(p1KeysSettings);
-        UnityEditor.EditorUtility.SetDirty(p2KeysSettings);
-#endif
+        LoadView();
+        
         p1Button.onTabSelected += OnPlayer1TabSelected;
         p2Button.onTabSelected += OnPlayer2TabSelected;
     }
@@ -76,6 +73,23 @@ public class ControlsSelection : MonoBehaviour
             return;
 
         SaveNewKeyBinding(pressedCustomkey);
+    }
+
+    private void InitializePlayerKeysSettings()
+    {
+        string p1FileName = "p1KeysSettings.json";
+
+        if (IOHandler.FileExists(p1FileName))
+            p1KeysSettings = IOHandler.LoadFile<KeysSettings>(p1FileName);
+        else
+            p1KeysSettings = new KeysSettings();
+
+        string p2FileName = "p2KeysSettings.json";
+
+        if (IOHandler.FileExists(p2FileName))
+            p2KeysSettings = IOHandler.LoadFile<KeysSettings>(p2FileName);
+        else
+            p2KeysSettings = new KeysSettings();
     }
 
     private void SaveNewKeyBinding(KeyCode keyCode)
@@ -166,7 +180,29 @@ public class ControlsSelection : MonoBehaviour
 
     public void LoadTutorial()
     {
+        SaveSettings();
+
         SBSceneManager.Instance.LoadTutorial();
+    }
+
+    private void SaveSettings()
+    {
+        SaveP1Settings();
+        SaveP2Settings();
+    }
+
+    private void SaveP1Settings()
+    {
+        var fileName = "p1KeysSettings.json";
+
+        IOHandler.SaveFile(fileName, p1KeysSettings);
+    }
+
+    private void SaveP2Settings()
+    {
+        var fileName = "p2KeysSettings.json";
+
+        IOHandler.SaveFile(fileName, p2KeysSettings);
     }
 
     public void ShowConfirmationPopUp()
