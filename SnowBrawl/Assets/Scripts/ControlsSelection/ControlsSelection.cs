@@ -102,12 +102,7 @@ public class ControlsSelection : MonoBehaviour
 
         Destroy(controlListenerCanvas);
 
-        KeysSettings keysSettings;
-
-        if (selectedPlayer == PlayerID.P1)
-            keysSettings = p1KeysSettings;
-        else
-            keysSettings = p2KeysSettings;
+        var keysSettings = GetSettingsByID(controlListener.PlayerID);
 
         switch (controlListener.GameAction)
         {
@@ -135,12 +130,7 @@ public class ControlsSelection : MonoBehaviour
     {
         foreach (ControlListener controlListener in allListeners)
         {
-            KeysSettings keysSettings;
-
-            if (controlListener.PlayerID == PlayerID.P1)
-                keysSettings = p1KeysSettings;
-            else
-                keysSettings = p2KeysSettings;
+            var keysSettings = GetSettingsByID(controlListener.PlayerID);
 
             switch (controlListener.GameAction)
             {
@@ -241,12 +231,7 @@ public class ControlsSelection : MonoBehaviour
             if (controlListener.KeyBinding != keyCode)
                 continue;
 
-            KeysSettings keysSettings;
-
-            if (selectedPlayer == PlayerID.P1)
-                keysSettings = p1KeysSettings;
-            else
-                keysSettings = p2KeysSettings;
+            var keysSettings = GetSettingsByID(selectedPlayer);
 
             switch (controlListener.GameAction)
             {
@@ -265,5 +250,13 @@ public class ControlsSelection : MonoBehaviour
             }
             controlListener.ResetBinding();
         }
+    }
+
+    private KeysSettings GetSettingsByID(PlayerID id)
+    {
+        if (id == PlayerID.P1)
+            return p1KeysSettings;
+        else
+            return p2KeysSettings;
     }
 }
